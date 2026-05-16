@@ -41,18 +41,22 @@ export function ThreeColumnSection() {
   const mediaRecorderRef = useRef<MediaRecorder | null>(null)
   const chunksRef = useRef<Blob[]>([])
   const timerRef = useRef<NodeJS.Timeout | null>(null)
+  const lastRecordedDuration = useRef<number>(0)
 
   // Real-time listener for poll
   useEffect(() => {
     // Only access localStorage on client
     if (typeof window !== "undefined") {
       const hasVoted = localStorage.getItem("hasVotedPoll") === "true"
-      if (hasVoted) setVotedOption("voted")
+      const savedOption = localStorage.getItem("votedOptionId")
+      if (hasVoted) {
+        setVotedOption(savedOption || "voted")
+      }
     }
 
-    const q = query(collection(db, "quickPollVotes"))
+    const q = query(collection(db, "pollVotes"))
     const unsubscribe = onSnapshot(q, (snapshot) => {
-      console.log("Poll Snapshot received! Total docs:", snapshot.docs.length)
+      console.log("POLL UPDATED! Docs:", snapshot.docs.length)
       const counts: any = {
         option1: 0,
         option2: 0,
@@ -68,11 +72,10 @@ export function ThreeColumnSection() {
         }
       })
       
-      console.log("Updated Poll Results:", counts)
       setPollData(counts)
       setIsPollLoading(false)
     }, (error) => {
-      console.error("Poll Snapshot Error:", error)
+      console.error("POLL SYNC ERROR:", error)
       setIsPollLoading(false)
     })
     
@@ -81,53 +84,73 @@ export function ThreeColumnSection() {
 
   // Real-time listener for voice notes
   useEffect(() => {
-    console.log("Setting up voice notes listener...")
-    // Temporarily removing orderBy to debug fetching issues
-    const q = query(collection(db, "voiceNotes"), limit(10))
+    // Ordering by newest first. Note: If this fails, Firestore index is needed.
+    const q = query(collection(db, "voiceNotes"), orderBy("createdAt", "desc"), limit(6))
     const unsubscribe = onSnapshot(q, (snapshot) => {
       const notes = snapshot.docs.map((doc) => ({
         id: doc.id,
         ...doc.data(),
       })) as VoiceNote[]
-      console.log("Voice notes fetched from Firestore:", notes.length, notes)
+      console.log("VOICE FETCHED! Count:", notes.length)
       setVoiceNotes(notes)
       setIsVoiceLoading(false)
     }, (error) => {
-      console.error("Firestore voiceNotes listener error:", error)
+      console.error("VOICE SYNC ERROR:", error)
       setIsVoiceLoading(false)
     })
     return () => unsubscribe()
   }, [])
 
   const handleVote = async (optionId: string) => {
-    if (votedOption || !pollData) return
+    if (votedOption) {
+      console.log("User has already voted.")
+      return
+    }
+    if (!pollData) {
+      console.log("Poll data not yet loaded. Cannot vote.")
+      return
+    }
     
-    console.log("Submitting poll vote:", optionId)
+    console.log("Submitting poll vote for:", optionId)
     setVotedOption(optionId)
     localStorage.setItem("hasVotedPoll", "true")
+    localStorage.setItem("votedOptionId", optionId) // Store specific option
     
     try {
-      await addDoc(collection(db, "quickPollVotes"), {
+      await addDoc(collection(db, "pollVotes"), {
         option: optionId,
         createdAt: serverTimestamp()
       })
-      console.log("Poll vote saved to Firestore")
+      console.log("VOTE SAVED!")
     } catch (err) {
-      console.error("Poll vote error:", err)
+      console.error("VOTE ERROR:", err)
       setVotedOption(null)
       localStorage.removeItem("hasVotedPoll")
+      localStorage.removeItem("votedOptionId")
       alert("Voting failed. Please check your connection.")
     }
   }
 
   const getPercentage = (optionId: string) => {
     if (!pollData || pollData.totalVotes === 0) return 0
-    return Math.round((pollData[optionId] / pollData.totalVotes) * 100)
+    const count = pollData[optionId] || 0
+    return Math.round((count / pollData.totalVotes) * 100)
   }
 
   const startRecording = async () => {
+    console.log("Requesting microphone access...")
+    
+    // Check if mediaDevices is supported
+    if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+      console.error("MediaDevices not supported in this browser")
+      alert("Your browser does not support voice recording. Please try Chrome or Safari.")
+      return
+    }
+
     try {
       const stream = await navigator.mediaDevices.getUserMedia({ audio: true })
+      console.log("Microphone access granted.")
+      
       const mediaRecorder = new MediaRecorder(stream)
       mediaRecorderRef.current = mediaRecorder
       chunksRef.current = []
@@ -137,33 +160,64 @@ export function ThreeColumnSection() {
       }
 
       mediaRecorder.onstop = async () => {
-        const finalTime = recordingTime
+        console.log("MediaRecorder stopped. Finalizing audio...")
         const audioBlob = new Blob(chunksRef.current, { type: "audio/webm" })
-        await uploadVoiceNote(audioBlob, finalTime)
+        const durationSnapshot = lastRecordedDuration.current > 0 ? lastRecordedDuration.current : 1
+        
+        // Ensure all UI states reset eventually
+        try {
+          await uploadVoiceNote(audioBlob, durationSnapshot)
+        } catch (err) {
+          console.error("Upload process failed:", err)
+        } finally {
+          console.log("Lifecycle complete. Resetting UI.")
+          setIsUploading(false)
+          setIsRecording(false)
+          setRecordingTime(0)
+        }
+        
         stream.getTracks().forEach((track) => track.stop())
       }
 
       mediaRecorder.start()
       setIsRecording(true)
       setRecordingTime(0)
+      
+      // Reset timer
+      if (timerRef.current) clearInterval(timerRef.current)
       timerRef.current = setInterval(() => {
         setRecordingTime((prev) => prev + 1)
       }, 1000)
-    } catch (err) {
-      console.error("Error accessing microphone:", err)
-      alert("Could not access microphone. Please check permissions.")
+    } catch (err: any) {
+      console.error("Microphone Access Error:", err)
+      setIsRecording(false)
+      if (err.name === "NotAllowedError" || err.name === "PermissionDeniedError") {
+        alert("Please allow microphone access to record your voice. Check your browser settings.")
+      } else if (err.name === "NotFoundError" || err.name === "DevicesNotFoundError") {
+        alert("No microphone found. Please connect a mic and try again.")
+      } else {
+        alert("Could not access microphone. Please ensure no other app is using it.")
+      }
     }
   }
 
   const stopRecording = () => {
     if (mediaRecorderRef.current && isRecording) {
+      console.log("Stopping recording manually...")
+      lastRecordedDuration.current = recordingTime
+      
+      if (timerRef.current) {
+        clearInterval(timerRef.current)
+        timerRef.current = null
+      }
+      
       mediaRecorderRef.current.stop()
       setIsRecording(false)
-      if (timerRef.current) clearInterval(timerRef.current)
     }
   }
 
   const formatDuration = (seconds: number) => {
+    if (seconds <= 0) return "0:01" // Minimum 1 second
     const mins = Math.floor(seconds / 60)
     const secs = seconds % 60
     return `${mins}:${secs.toString().padStart(2, "0")}`
@@ -191,14 +245,17 @@ export function ThreeColumnSection() {
     }
   }, [])
   const uploadVoiceNote = async (blob: Blob, finalTime: number) => {
-    console.log("Starting voice upload. Size:", blob.size, "Duration:", finalTime)
+    console.log("UPLOAD START: Size:", blob.size, "Duration:", finalTime)
     setIsUploading(true)
+    
     try {
       const formData = new FormData()
       formData.append("file", blob)
       formData.append("upload_preset", process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET!)
       
       const cloudName = process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME
+      console.log("Uploading to Cloudinary...")
+      
       const response = await fetch(
         `https://api.cloudinary.com/v1_1/${cloudName}/video/upload`,
         {
@@ -213,32 +270,32 @@ export function ThreeColumnSection() {
       }
       
       const data = await response.json()
-      console.log("Cloudinary Upload Success:", data.secure_url)
+      console.log("CLOUDINARY SUCCESS:", data.secure_url)
       
       const audioUrl = data.secure_url
-      const duration = formatDuration(finalTime)
+      const durationStr = formatDuration(finalTime)
       const waveform = Array.from({ length: 15 }, () => Math.floor(Math.random() * 6) + 3)
 
-      console.log("Saving voice note to Firestore...")
+      console.log("Saving to Firestore...")
       try {
         await addDoc(collection(db, "voiceNotes"), {
           audioUrl,
           waveform,
-          duration,
+          duration: durationStr,
           anonymous: true,
           createdAt: serverTimestamp(),
           userId: auth.currentUser?.uid || "anon",
         })
-        console.log("Voice note saved successfully to Firestore!")
+        console.log("FIRESTORE SUCCESS!")
       } catch (dbErr) {
-        console.error("Firestore save failed:", dbErr)
+        console.error("FIRESTORE ERROR:", dbErr)
         throw dbErr
       }
     } catch (err: any) {
-      console.error("Critical Upload Error:", err)
+      console.error("UPLOAD FAILED:", err)
       alert(`Upload failed: ${err.message || "Unknown error"}`)
     } finally {
-      console.log("Finalizing upload state...")
+      console.log("UPLOAD FINISHED: Cleaning up state.")
       setIsUploading(false)
     }
   }
@@ -324,7 +381,7 @@ export function ThreeColumnSection() {
               Voice Notes
             </span>
 
-            <div className="space-y-4 max-h-[380px] overflow-y-auto pr-2 custom-scrollbar">
+            <div className={`space-y-4 pr-2 custom-scrollbar ${voiceNotes.length > 3 ? "max-h-[320px] overflow-y-auto" : ""}`}>
               {isVoiceLoading ? (
                 // Shimmer Skeletons
                 <div className="space-y-4">
