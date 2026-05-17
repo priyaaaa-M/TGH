@@ -8,12 +8,12 @@ import { Menu, X, Sparkles } from "lucide-react"
 const FORM_URL = "https://docs.google.com/forms/d/1ZSUlQS2k2gWhYY2oZmEOwRshBHK-Ml_tfNpdBm17cJk/edit?utm"
 
 const navItems = [
-  { name: "Home", href: "#" },
-  { name: "About", href: "#about" },
-  { name: "Experience", href: "#experience" },
-  { name: "Voices", href: "#voices" },
-  { name: "Team", href: "#team" },
-  { name: "FAQ", href: "#faq" },
+  { name: "Home", href: "/" },
+  { name: "Explore", href: "/explore" },
+  { name: "Experience", href: "/#experience" },
+  { name: "Voices", href: "/#voices" },
+  { name: "Team", href: "/#team" },
+  { name: "FAQ", href: "/#faq" },
 ]
 
 export function Navbar() {
@@ -79,12 +79,12 @@ export function Navbar() {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="md:hidden p-2 rounded-lg hover:bg-lavender/30 transition-colors"
+            className="md:hidden p-2.5 -mr-2 rounded-full bg-white/40 backdrop-blur-md border border-foreground/5 hover:bg-lavender/30 transition-colors shadow-sm"
           >
             {isMobileMenuOpen ? (
-              <X className="w-6 h-6" />
+              <X className="w-5 h-5" />
             ) : (
-              <Menu className="w-6 h-6" />
+              <Menu className="w-5 h-5" />
             )}
           </button>
         </div>
@@ -97,20 +97,20 @@ export function Navbar() {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden bg-[#F8F4EE]/95 backdrop-blur-md border-t border-border"
+            className="md:hidden bg-[#F8F4EE]/85 backdrop-blur-xl border-t border-border/50 absolute w-full shadow-soft"
           >
-            <div className="px-4 py-6 space-y-4">
+            <div className="px-6 py-8 space-y-5">
               {navItems.map((item, index) => (
                 <motion.div
                   key={item.name}
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: index * 0.1 }}
+                  transition={{ delay: index * 0.05 }}
                 >
                   <Link
                     href={item.href}
                     onClick={() => setIsMobileMenuOpen(false)}
-                    className="block text-lg font-medium py-2 hover:text-lavender transition-colors"
+                    className="block text-xl font-serif font-medium py-1 hover:text-lavender transition-colors"
                   >
                     {item.name}
                   </Link>
@@ -119,12 +119,12 @@ export function Navbar() {
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.4 }}
-                className="pt-4"
+                transition={{ delay: 0.3 }}
+                className="pt-6"
               >
                 <button
                     onClick={() => { window.open(FORM_URL, "_blank"); setIsMobileMenuOpen(false) }}
-                    className="block w-full text-center bg-foreground text-primary-foreground px-5 py-3 rounded-full text-sm font-medium"
+                    className="block w-full text-center bg-foreground text-primary-foreground px-6 py-4 rounded-full text-base font-medium shadow-soft"
                   >
                     Join the Space
                   </button>

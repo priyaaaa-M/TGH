@@ -7,28 +7,16 @@ import { Heart } from "lucide-react"
 
 const teamMembers = [
   {
-    name: "Miti Shah",
-    role: "Host / MC",
-    quote: "“Some stories are not spoken loudly, they are simply felt.”",
-    image: "/profile_pic/Miti Shah.png",
-    bgColor: "bg-[#FFF9E8]",
-    tapeColor: "rgba(250,220,60,0.65)",
-    tapeAngle: -3,
-    rotation: -2,
-    doodle: "✦",
-    doodleColor: "text-pastel-yellow",
-  },
-  {
-    name: "Sourabh Bagree",
-    role: "Facilitator",
-    quote: "“Kuch toh log kahenge, logon ka kaam hai kehna.”",
-    image: "/profile_pic/Sourabh Bagree.png",
-    bgColor: "bg-[#E8F5E8]",
-    tapeColor: "rgba(130,200,180,0.65)",
-    tapeAngle: 2,
-    rotation: 2,
-    doodle: "〰️",
-    doodleColor: "text-sage",
+    name: "Dipti Paras Shah",
+    role: "Program Curator",
+    quote: "“Dil hai chota sa, choti si aasha.”",
+    image: "/profile_pic/Dipti Shah .png",
+    bgColor: "bg-[#EDE0FF]",
+    tapeColor: "rgba(230,170,220,0.65)",
+    tapeAngle: -2,
+    rotation: -1,
+    doodle: "🎬",
+    doodleColor: "text-lavender",
   },
   {
     name: "Dimple Jogani",
@@ -43,6 +31,18 @@ const teamMembers = [
     doodleColor: "text-peach",
   },
   {
+    name: "Sourabh Bagree",
+    role: "Facilitator",
+    quote: "“Kuch toh log kahenge, logon ka kaam hai kehna.”",
+    image: "/profile_pic/Sourabh Bagree.png",
+    bgColor: "bg-[#E8F5E8]",
+    tapeColor: "rgba(130,200,180,0.65)",
+    tapeAngle: 2,
+    rotation: 2,
+    doodle: "〰️",
+    doodleColor: "text-sage",
+  },
+  {
     name: "Priyanka Mandal",
     role: "Digital Lead",
     quote: "“Designing systems that simplify, not complicate.”",
@@ -55,16 +55,16 @@ const teamMembers = [
     doodleColor: "text-baby-blue",
   },
   {
-    name: "Dipti Paras Shah",
-    role: "Program Curator",
-    quote: "“Dil hai chota sa, choti si aasha.”",
-    image: "/profile_pic/Dipti Shah .png",
-    bgColor: "bg-[#EDE0FF]",
-    tapeColor: "rgba(230,170,220,0.65)",
-    tapeAngle: -2,
-    rotation: -1,
-    doodle: "🎬",
-    doodleColor: "text-lavender",
+    name: "Coming Soon",
+    role: "Creative Practitioner",
+    quote: "“Bringing storytelling to life, Because expression needs safety.”",
+    image: "",
+    bgColor: "bg-[#FFF9E8]",
+    tapeColor: "rgba(250,220,60,0.65)",
+    tapeAngle: -3,
+    rotation: -2,
+    doodle: "✦",
+    doodleColor: "text-pastel-yellow",
   },
   {
     name: "Coming Soon",
@@ -151,7 +151,7 @@ export function PeopleSection() {
               style={{ width: "240px" }}
             >
               {/* Card Container */}
-              <div 
+              <div
                 className={`p-3 pb-6 rounded-sm shadow-md transition-shadow duration-300 group-hover:shadow-xl relative ${member.bgColor}`}
                 style={{ transform: `rotate(${member.rotation}deg)` }}
               >
@@ -165,8 +165,8 @@ export function PeopleSection() {
                 />
 
                 {/* Floating Doodle */}
-                <motion.div 
-                  animate={{ y: [0, -4, 0], rotate: [0, 8, 0] }} 
+                <motion.div
+                  animate={{ y: [0, -4, 0], rotate: [0, 8, 0] }}
                   transition={{ duration: 3, repeat: Infinity, delay: index * 0.3 }}
                   className={`absolute -top-5 -right-3 text-3xl font-handwritten ${member.doodleColor} opacity-70 group-hover:opacity-100 group-hover:scale-125 transition-all duration-300 z-30`}
                 >
@@ -175,15 +175,21 @@ export function PeopleSection() {
 
                 {/* Photo */}
                 <div className="relative w-full h-[200px] bg-white/50 mb-4 overflow-hidden rounded-[2px] shadow-inner group-hover:shadow-md transition-all duration-300">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
-                    src={member.image}
-                    alt={member.name}
-                    className="w-full h-full object-cover grayscale-[20%] sepia-[10%] group-hover:grayscale-0 group-hover:sepia-0 group-hover:scale-105 transition-all duration-500"
-                    onError={(e) => {
-                      (e.target as HTMLImageElement).src = 'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=400&h=500&fit=crop';
-                    }}
-                  />
+                  {member.image ? (
+                    /* eslint-disable-next-line @next/next/no-img-element */
+                    <img
+                      src={member.image}
+                      alt={member.name}
+                      className="w-full h-full object-cover grayscale-[20%] sepia-[10%] group-hover:grayscale-0 group-hover:sepia-0 group-hover:scale-105 transition-all duration-500"
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).src = 'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=400&h=500&fit=crop';
+                      }}
+                    />
+                  ) : (
+                    <div className="w-full h-full bg-pastel-yellow/20 flex flex-col items-center justify-center border-2 border-dashed border-pastel-yellow/50">
+                      <span className="font-serif text-lg font-medium text-foreground/50">Coming Soon</span>
+                    </div>
+                  )}
                   {/* Subtle paper grain over photo */}
                   <div className="absolute inset-0 opacity-[0.08] mix-blend-multiply bg-[url('https://www.transparenttextures.com/patterns/paper-fibers.png')] pointer-events-none" />
                 </div>
@@ -196,7 +202,7 @@ export function PeopleSection() {
                   <span className="inline-block mt-1 px-2.5 py-0.5 bg-white/60 rounded-full text-[11px] font-medium text-foreground/70 tracking-wide uppercase">
                     {member.role}
                   </span>
-                  
+
                   <div className="mt-4 px-1 relative">
                     <span className="absolute -left-1 -top-1 text-2xl text-foreground/10 font-serif leading-none">"</span>
                     <p className="font-handwritten text-foreground/80 text-[15px] leading-snug">
@@ -221,8 +227,8 @@ export function PeopleSection() {
           className="object-cover"
         />
         <div className="absolute inset-0 bg-black/50 bg-gradient-to-t from-[#111111]/90 via-[#111111]/40 to-transparent" />
-        
-        <motion.div 
+
+        <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -235,9 +241,9 @@ export function PeopleSection() {
           <p className="text-xl md:text-2xl lg:text-3xl text-white/90 font-handwritten leading-relaxed drop-shadow-md">
             It is a youth-led expression lab built with care, courage, creativity, and community.”
           </p>
-          
-          <motion.div 
-            animate={{ scale: [1, 1.1, 1] }} 
+
+          <motion.div
+            animate={{ scale: [1, 1.1, 1] }}
             transition={{ duration: 2, repeat: Infinity }}
             className="mt-10 text-soft-pink/80"
           >

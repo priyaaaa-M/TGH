@@ -8,16 +8,16 @@ import { db } from "@/lib/firebase"
 import { collection, addDoc, serverTimestamp, query, where, getDocs } from "firebase/firestore"
 
 const quickLinks = [
-  { name: "About", href: "#about" },
-  { name: "How It Works", href: "#experience" },
-  { name: "Wall", href: "#voices" },
-  { name: "Daily Prompt", href: "#" },
+  { name: "Explore", href: "/explore" },
+  { name: "How It Works", href: "/#experience" },
+  { name: "Wall", href: "/#voices" },
+  { name: "Daily Prompt", href: "/#" },
 ]
 
 const moreLinks = [
-  { name: "People", href: "#team" },
-  { name: "BTS", href: "#bts" },
-  { name: "Join the Space", href: "#join" },
+  { name: "People", href: "/#team" },
+  { name: "BTS", href: "/#bts" },
+  { name: "Join the Space", href: "/#join" },
 ]
 
 const socialLinks = [

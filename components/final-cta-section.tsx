@@ -72,8 +72,8 @@ export function FinalCTASection() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
-              onClick={() => window.open(FORM_URL, "_blank")}
-              className="bg-white rounded-2xl p-5 shadow-soft cursor-pointer group w-full text-left"
+                  onClick={index === 0 ? () => window.open(FORM_URL, "_blank") : undefined}
+                  className={`bg-white rounded-2xl p-5 shadow-soft w-full text-left ${index === 0 ? "cursor-pointer group hover:shadow-md transition-shadow" : ""}`}
                 >
                   <div
                     className={`w-12 h-12 ${role.iconBg} rounded-full flex items-center justify-center mb-4`}
@@ -86,9 +86,11 @@ export function FinalCTASection() {
                     {role.description}
                   </p>
 
-                  <div className="flex items-center gap-1 text-foreground/60 group-hover:text-foreground transition-colors">
-                    <ArrowRight className="w-4 h-4" />
-                  </div>
+                  {index === 0 && (
+                    <div className="flex items-center gap-1 text-foreground/60 group-hover:text-foreground transition-colors">
+                      <ArrowRight className="w-4 h-4" />
+                    </div>
+                  )}
                 </motion.div>
               ))}
             </div>

@@ -116,7 +116,7 @@ export function BehindTheScenesSection() {
 
   useEffect(() => {
     if (isPaused) return
-    const id = setInterval(next, 4000)
+    const id = setInterval(next, 8000) // Slowed down significantly for better readability
     return () => clearInterval(id)
   }, [isPaused, next])
 
@@ -236,6 +236,8 @@ export function BehindTheScenesSection() {
             className="lg:col-span-8 relative overflow-hidden"
             onMouseEnter={() => setIsPaused(true)}
             onMouseLeave={() => setIsPaused(false)}
+            onTouchStart={() => setIsPaused(true)}
+            onTouchEnd={() => setIsPaused(false)}
           >
             <motion.div
               drag="x"

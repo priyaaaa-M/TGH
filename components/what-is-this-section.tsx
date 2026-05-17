@@ -87,10 +87,10 @@ export function WhatIsThisSection() {
             </p>
 
             <Link
-              href="#experience"
+              href="/explore"
               className="inline-flex items-center gap-2 bg-foreground text-primary-foreground px-6 py-3 rounded-full font-medium hover:bg-foreground/90 transition-all hover:scale-105"
             >
-              Know More
+              Learn More
               <ArrowUpRight className="w-4 h-4" />
             </Link>
           </motion.div>
