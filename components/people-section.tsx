@@ -188,7 +188,7 @@ export function PeopleSection() {
               </div>
             </motion.div>
           ))}
-        </motion.div>
+        </div>
       </div>
 
       {/* Cinematic Footer Section */}
