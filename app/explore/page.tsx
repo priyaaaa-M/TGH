@@ -262,6 +262,97 @@ export default function ExplorePage() {
         </div>
       </section>
 
+      {/* SECTION 5 - JOIN THE EXPERIENCE */}
+      <section className="py-24 px-6 bg-[#faf9f7] relative overflow-hidden">
+        {/* Decorative background paper pattern */}
+        <div className="absolute inset-0 opacity-[0.02] pointer-events-none"
+          style={{ backgroundImage: "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%' height='100%' filter='url(%23noise)'/%3E%3C/svg%3E\")" }}
+        />
+
+        <div className="max-w-4xl mx-auto text-center relative z-10">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="space-y-8"
+          >
+            {/* Tag */}
+            <span className="inline-block bg-peach/50 px-4 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wider text-foreground/80 rotate-[-1deg]">
+              Registrations Are Now Open
+            </span>
+
+            {/* Headline */}
+            <div className="space-y-2">
+              <h2 className="text-3xl md:text-5xl font-serif font-bold text-foreground">
+                The Girlfriend Hour —{" "}
+                <span className="font-handwritten text-lavender italic font-normal block md:inline text-4xl md:text-6xl">
+                  “UNFILTERED”
+                </span>
+              </h2>
+              <p className="text-sm md:text-base font-handwritten text-muted-foreground italic">
+                (No edits. No apologies. Just you.)
+              </p>
+            </div>
+
+            {/* Main description paragraph */}
+            <div className="max-w-2xl mx-auto space-y-6 text-foreground/80 leading-relaxed text-base md:text-lg font-medium">
+              <p>
+                A safe, expressive, and collaborative experience where young voices come together through theatre, poetry, music, storytelling, dance, comedy, conversation, and creative exploration.
+              </p>
+              <p>
+                Inspired by films, emotions, lived experiences, and personal truth — participants will interpret themes through their own lens and build something meaningful together.
+              </p>
+            </div>
+
+            {/* Bullet points section */}
+            <div className="bg-white/60 backdrop-blur-md p-8 rounded-[2rem] border border-white/50 max-w-xl mx-auto shadow-sm text-left">
+              <h4 className="font-serif font-bold text-lg mb-4 text-center">Whether you want to:</h4>
+              <ul className="grid grid-cols-2 gap-3 max-w-md mx-auto">
+                {["perform", "create", "collaborate", "organise", "support", "simply experience"].map((item) => (
+                  <li key={item} className="flex items-center justify-center sm:justify-start gap-2 bg-cream px-3.5 py-2 rounded-full text-xs sm:text-sm font-semibold border border-border/40 text-foreground/85">
+                    <Heart className="w-3 h-3 text-soft-pink fill-soft-pink flex-shrink-0" />
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+              <p className="text-center font-handwritten text-lg mt-6 text-[#E8612A] font-bold">
+                — there is space for you here.
+              </p>
+            </div>
+
+            {/* Invitation */}
+            <div className="space-y-1 font-serif text-lg md:text-2xl font-bold tracking-wider text-foreground/90 uppercase pt-4 leading-tight">
+              <p>Build your team.</p>
+              <p>Bring your voice.</p>
+              <p>Come as you are.</p>
+            </div>
+
+            {/* Google Form Embed Container */}
+            <div className="mt-16 bg-white/40 backdrop-blur-sm p-3 sm:p-5 md:p-6 rounded-[2.5rem] border border-white/60 shadow-soft max-w-3xl mx-auto overflow-hidden">
+              <div className="relative w-full overflow-hidden rounded-[2rem] bg-cream/30 min-h-[750px] sm:min-h-[850px] md:min-h-[900px] border border-border/20">
+                <iframe
+                  src="https://docs.google.com/forms/d/1ZSUlQS2k2gWhYY2oZmEOwRshBHK-Ml_tfNpdBm17cJk/viewform?embedded=true"
+                  width="100%"
+                  height="100%"
+                  frameBorder="0"
+                  marginHeight={0}
+                  marginWidth={0}
+                  className="absolute inset-0 w-full h-full rounded-[2rem]"
+                >
+                  Loading…
+                </iframe>
+              </div>
+            </div>
+
+            {/* Small Emotional Footer Text */}
+            <p className="font-handwritten text-lg sm:text-xl text-foreground/70 max-w-md mx-auto pt-6 leading-relaxed">
+              “Looking forward to creating something honest, expressive, and unforgettable together 💫”
+            </p>
+          </motion.div>
+        </div>
+      </section>
+
       <Footer />
     </main>
   )
