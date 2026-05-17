@@ -102,18 +102,16 @@ export function PeopleSection() {
         </motion.div>
       </div>
 
-      {/* Horizontal Draggable Carousel */}
-      <div className="relative z-20 pb-20 overflow-hidden cursor-grab active:cursor-grabbing">
+      {/* Horizontal Scroll Carousel */}
+      <div className="relative z-20 pb-20">
         {/* Gradients for fade effect on edges */}
         <div className="absolute left-0 top-0 bottom-0 w-8 md:w-16 bg-gradient-to-r from-[#faf9f7] to-transparent z-10 pointer-events-none" />
         <div className="absolute right-0 top-0 bottom-0 w-8 md:w-16 bg-gradient-to-l from-[#faf9f7] to-transparent z-10 pointer-events-none" />
 
-        <motion.div
+        <div
           ref={containerRef}
-          drag="x"
-          dragConstraints={{ right: 0, left: -width }}
-          className="flex gap-6 px-4 md:px-16"
-          style={{ paddingLeft: "max(1rem, calc((100vw - 80rem) / 2 + 1rem))" }}
+          className="flex gap-6 px-8 md:px-16 overflow-x-auto snap-x snap-mandatory pt-8 pb-12 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
+          style={{ paddingLeft: "max(2rem, calc((100vw - 80rem) / 2 + 2rem))" }}
         >
           {teamMembers.map((member, index) => (
             <motion.div
@@ -123,7 +121,7 @@ export function PeopleSection() {
               viewport={{ once: true, margin: "-50px" }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
               whileHover={{ scale: 1.05, rotate: 0, y: -10, zIndex: 40 }}
-              className="flex-shrink-0 relative group"
+              className="flex-shrink-0 relative group snap-center"
               style={{ width: "240px" }}
             >
               {/* Card Container */}
