@@ -62,86 +62,160 @@ export default function ExplorePage() {
       </section>
 
       {/* SECTION 2 - THE ECOSYSTEM */}
-      <section className="py-24 px-6 relative bg-[#FAF6F0] overflow-hidden">
+      <section className="py-28 px-6 relative bg-[#FAF6F0] overflow-hidden">
         {/* Subtle decorative grid/dots background */}
         <div className="absolute inset-0 pointer-events-none opacity-20" style={{ backgroundImage: 'radial-gradient(circle at 2px 2px, black 1px, transparent 0)', backgroundSize: '40px 40px' }} />
 
-        <div className="max-w-3xl mx-auto relative z-10">
+        {/* Decorative background illustrations (floating shapes) */}
+        <div className="absolute top-20 left-[5%] text-soft-pink opacity-20 animate-pulse pointer-events-none">
+          <Heart className="w-16 h-16 fill-current" />
+        </div>
+        <div className="absolute bottom-20 right-[5%] text-lavender opacity-20 animate-pulse pointer-events-none">
+          <Sparkles className="w-20 h-20 fill-current" />
+        </div>
+
+        <div className="max-w-5xl mx-auto relative z-10">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            className="text-center mb-16"
+            className="text-center mb-24 space-y-4"
           >
+            <span className="font-handwritten text-lavender text-xl md:text-2xl tracking-wide inline-block transform -rotate-1">
+              Our Foundations
+            </span>
             <h2 className="text-3xl md:text-5xl font-serif font-bold text-foreground">
               The Spaces Behind This Experience
             </h2>
           </motion.div>
 
-          {/* Simple story timeline flow */}
-          <div className="relative flex flex-col items-center">
+          {/* Staggered Timeline Flow */}
+          <div className="relative flex flex-col items-stretch max-w-4xl mx-auto space-y-16 md:space-y-24">
             
-            {/* The simple connecting dashed line */}
-            <div className="absolute top-10 bottom-10 w-[2px] border-l-2 border-dashed border-lavender/40 pointer-events-none z-0" />
+            {/* Soft connecting dotted pathway */}
+            <div className="absolute left-1/2 top-10 bottom-10 w-[2px] border-l-2 border-dashed border-lavender/40 pointer-events-none z-0 hidden md:block -translate-x-1/2" />
 
-            {/* SPACE 1: THE GIRLFRIEND HOUR */}
+            {/* SPACE 1: THE GIRLFRIEND HOUR (Staggered Left) */}
             <motion.div 
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-              className="relative z-10 w-full text-center pb-14"
+              initial={{ opacity: 0, x: -50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.7 }}
+              className="relative z-10 w-full md:w-[70%] md:self-start group"
             >
-              <div className="inline-block max-w-xl mx-auto transition-transform hover:scale-[1.01]">
-                <h3 className="text-xl md:text-2xl font-serif font-bold text-[#E8612A] mb-3 tracking-wide uppercase">
+              <div 
+                className="bg-[#FFF4F0] border border-[#FFD9CE] p-8 md:p-10 rounded-[2.5rem] shadow-soft relative transition-all duration-300 hover:shadow-xl hover:scale-[1.02] cursor-default"
+                style={{ transform: "rotate(-1.5deg)" }}
+              >
+                {/* Scrapbook Tape */}
+                <div 
+                  className="absolute -top-2.5 left-1/2 -translate-x-1/2 w-16 h-5 rounded-[2px] shadow-sm z-20"
+                  style={{
+                    background: "rgba(255, 180, 160, 0.65)",
+                    transform: "translateX(-50%) rotate(-4deg)"
+                  }}
+                />
+
+                {/* Mini handwritten label */}
+                <span className="font-handwritten text-[#E8612A] text-lg md:text-xl font-bold tracking-wide uppercase block mb-3">
+                  The Experience
+                </span>
+
+                <h3 className="text-2xl md:text-3xl font-serif font-bold text-foreground mb-4">
                   THE GIRLFRIEND HOUR
                 </h3>
-                <p className="text-base text-foreground/80 leading-relaxed font-medium">
+                
+                <p className="text-base text-foreground/85 leading-relaxed font-medium">
                   A creative micro-culture experience that brings young women together through storytelling, performance, and collaborative expression rooted in empathy, identity, and community.
                 </p>
+
+                {/* Floating Doodle */}
+                <div className="absolute -top-6 -right-6 text-4xl opacity-50 group-hover:opacity-100 group-hover:scale-125 transition-all duration-300 pointer-events-none z-30">
+                  💖
+                </div>
               </div>
             </motion.div>
 
-            {/* Divider Arrow */}
-            <div className="relative z-10 my-2 text-lavender font-serif text-2xl font-light">↓</div>
-
-            {/* SPACE 2: KSHRUJAN */}
+            {/* SPACE 2: KSHRUJAN (Staggered Right) */}
             <motion.div 
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-              className="relative z-10 w-full text-center pb-14"
+              initial={{ opacity: 0, x: 50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.7 }}
+              className="relative z-10 w-full md:w-[70%] md:self-end group"
             >
-              <div className="inline-block max-w-xl mx-auto transition-transform hover:scale-[1.01]">
-                <h3 className="text-xl md:text-2xl font-serif font-bold text-[#5B8266] mb-3 tracking-wide uppercase">
+              <div 
+                className="bg-[#F3F8F4] border border-[#D5EAD8] p-8 md:p-10 rounded-[2.5rem] shadow-soft relative transition-all duration-300 hover:shadow-xl hover:scale-[1.02] cursor-default"
+                style={{ transform: "rotate(1.2deg)" }}
+              >
+                {/* Scrapbook Tape */}
+                <div 
+                  className="absolute -top-2.5 left-1/2 -translate-x-1/2 w-16 h-5 rounded-[2px] shadow-sm z-20"
+                  style={{
+                    background: "rgba(190, 225, 200, 0.65)",
+                    transform: "translateX(-50%) rotate(3deg)"
+                  }}
+                />
+
+                {/* Mini handwritten label */}
+                <span className="font-handwritten text-[#5B8266] text-lg md:text-xl font-bold tracking-wide uppercase block mb-3">
+                  Organising & Shaping
+                </span>
+
+                <h3 className="text-2xl md:text-3xl font-serif font-bold text-foreground mb-4">
                   KSHRUJAN
                 </h3>
-                <p className="text-base text-foreground/80 leading-relaxed font-medium">
+                
+                <p className="text-base text-foreground/85 leading-relaxed font-medium">
                   A youth-centered initiative focused on expression, communication, confidence-building, and meaningful learning experiences for students and young adults.
                 </p>
+
+                {/* Floating Doodle */}
+                <div className="absolute -bottom-6 -left-6 text-4xl opacity-50 group-hover:opacity-100 group-hover:scale-125 transition-all duration-300 pointer-events-none z-30">
+                  🌱
+                </div>
               </div>
             </motion.div>
 
-            {/* Divider Arrow */}
-            <div className="relative z-10 my-2 text-lavender font-serif text-2xl font-light">↓</div>
-
-            {/* SPACE 3: UDAYAN CARE FELLOWSHIP PROGRAM */}
+            {/* SPACE 3: UDAYAN CARE FELLOWSHIP PROGRAM (Staggered Left) */}
             <motion.div 
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-              className="relative z-10 w-full text-center"
+              initial={{ opacity: 0, x: -50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.7 }}
+              className="relative z-10 w-full md:w-[70%] md:self-start group"
             >
-              <div className="inline-block max-w-xl mx-auto transition-transform hover:scale-[1.01]">
-                <h3 className="text-xl md:text-2xl font-serif font-bold text-[#3B66D4] mb-3 tracking-wide uppercase">
+              <div 
+                className="bg-[#F2F4FC] border border-[#D3DBFA] p-8 md:p-10 rounded-[2.5rem] shadow-soft relative transition-all duration-300 hover:shadow-xl hover:scale-[1.02] cursor-default"
+                style={{ transform: "rotate(-1deg)" }}
+              >
+                {/* Scrapbook Tape */}
+                <div 
+                  className="absolute -top-2.5 left-1/2 -translate-x-1/2 w-16 h-5 rounded-[2px] shadow-sm z-20"
+                  style={{
+                    background: "rgba(180, 195, 250, 0.65)",
+                    transform: "translateX(-50%) rotate(-2deg)"
+                  }}
+                />
+
+                {/* Mini handwritten label */}
+                <span className="font-handwritten text-[#3B66D4] text-lg md:text-xl font-bold tracking-wide uppercase block mb-3">
+                  The Support System
+                </span>
+
+                <h3 className="text-2xl md:text-3xl font-serif font-bold text-foreground mb-4">
                   UDAYAN CARE FELLOWSHIP PROGRAM
                 </h3>
-                <p className="text-base text-foreground/80 leading-relaxed font-medium">
+                
+                <p className="text-base text-foreground/85 leading-relaxed font-medium">
                   A leadership and social impact initiative that supports young women through mentorship, education, exposure, and community-based learning experiences.
                 </p>
+
+                {/* Floating Doodle */}
+                <div className="absolute -top-6 -left-6 text-4xl opacity-50 group-hover:opacity-100 group-hover:scale-125 transition-all duration-300 pointer-events-none z-30">
+                  💫
+                </div>
               </div>
             </motion.div>
 
