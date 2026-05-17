@@ -61,232 +61,140 @@ export default function ExplorePage() {
         </motion.div>
       </section>
 
-      {/* SECTION 2 - ABOUT THE INITIATIVES */}
-      <section className="py-20 px-6 relative">
-        <div className="max-w-5xl mx-auto space-y-16">
-          
-          {/* Card 1 */}
-          <motion.div 
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="bg-white rounded-[2.5rem] p-8 md:p-12 shadow-soft relative overflow-hidden border border-border/50 group"
-          >
-            <div className="absolute top-0 right-0 w-32 h-32 bg-baby-blue/20 rounded-bl-full transition-transform group-hover:scale-110" />
-            <div className="relative z-10 md:w-2/3">
-              <div className="inline-flex items-center gap-2 bg-baby-blue/30 px-3 py-1 rounded-full text-xs font-medium uppercase tracking-wide mb-6">
-                <Star className="w-3 h-3 text-foreground/70" />
-                Initiative
-              </div>
-              <h2 className="text-3xl md:text-4xl font-serif font-bold mb-4">Udayan Care Fellowship Program</h2>
-              <p className="text-lg text-muted-foreground leading-relaxed">
-                The Udayan Care Fellowship Program is a leadership and social impact initiative that supports young women through mentorship, education, exposure, and community-based learning experiences.
-              </p>
-              <div className="flex flex-wrap gap-2 mt-6">
-                {["Leadership", "Learning", "Youth", "Women", "Growth"].map(tag => (
-                  <span key={tag} className="bg-foreground/5 px-3 py-1 rounded-full text-xs font-medium text-foreground/70">{tag}</span>
-                ))}
-              </div>
-            </div>
-          </motion.div>
-
-          {/* Card 2 */}
-          <motion.div 
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            className="bg-sage-green/10 rounded-[2.5rem] p-8 md:p-12 shadow-soft relative overflow-hidden border border-sage-green/20 group md:ml-auto md:w-[90%]"
-          >
-            <div className="absolute -bottom-8 -left-8 w-40 h-40 bg-sage-green/20 rounded-full transition-transform group-hover:scale-110" />
-            <div className="relative z-10 md:w-3/4 md:ml-auto">
-              <div className="inline-flex items-center gap-2 bg-sage-green/30 px-3 py-1 rounded-full text-xs font-medium uppercase tracking-wide mb-6">
-                <Users className="w-3 h-3 text-foreground/70" />
-                Ecosystem
-              </div>
-              <h2 className="text-3xl md:text-4xl font-serif font-bold mb-4">KSHRUJAN</h2>
-              <p className="text-lg text-muted-foreground leading-relaxed">
-                KSHRUJAN is a youth-centered initiative focused on expression, communication, confidence-building, and meaningful learning experiences for students and young adults.
-              </p>
-              <div className="flex flex-wrap gap-2 mt-6">
-                {["Creative Learning", "Expression", "Workshops", "Collaboration"].map(tag => (
-                  <span key={tag} className="bg-foreground/5 px-3 py-1 rounded-full text-xs font-medium text-foreground/70">{tag}</span>
-                ))}
-              </div>
-            </div>
-          </motion.div>
-
-          {/* Card 3 */}
-          <motion.div 
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="bg-peach/10 rounded-[2.5rem] p-8 md:p-12 shadow-soft relative overflow-hidden border border-peach/20 group"
-          >
-            <div className="absolute top-1/2 right-4 -translate-y-1/2 w-24 h-24 bg-peach/30 rounded-full blur-xl transition-transform group-hover:scale-150" />
-            <div className="relative z-10 md:w-2/3">
-              <div className="inline-flex items-center gap-2 bg-peach/30 px-3 py-1 rounded-full text-xs font-medium uppercase tracking-wide mb-6">
-                <Flame className="w-3 h-3 text-foreground/70" />
-                Experience
-              </div>
-              <h2 className="text-3xl md:text-4xl font-serif font-bold mb-4">The Girlfriend Hour</h2>
-              <p className="text-lg text-muted-foreground leading-relaxed">
-                The Girlfriend Hour is a creative micro-culture experience that brings young women together through storytelling, performance, and collaborative expression rooted in empathy, identity, and community.
-              </p>
-              <div className="flex flex-wrap gap-2 mt-6">
-                {["Friendship", "Storytelling", "Stage", "Music", "Expression"].map(tag => (
-                  <span key={tag} className="bg-foreground/5 px-3 py-1 rounded-full text-xs font-medium text-foreground/70">{tag}</span>
-                ))}
-              </div>
-            </div>
-          </motion.div>
-
-        </div>
-      </section>
-
-      {/* SECTION 3 - HOW IT ALL CONNECTS */}
-      <section className="py-28 px-6 bg-[#FAF6F0] relative overflow-hidden">
-        {/* Decorative background scribbles */}
+      {/* SECTION 2 - THE ECOSYSTEM */}
+      <section className="py-24 px-6 relative bg-cream/30 overflow-hidden">
+        {/* Subtle decorative grid/dots background */}
         <div className="absolute inset-0 pointer-events-none opacity-20" style={{ backgroundImage: 'radial-gradient(circle at 2px 2px, black 1px, transparent 0)', backgroundSize: '40px 40px' }} />
-        
-        <div className="max-w-3xl mx-auto relative z-10">
-          <div className="text-center mb-16">
-            <span className="inline-block bg-lavender/60 px-4 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wider text-foreground/80 rotate-[-1deg] mb-4">
-              Our Blueprint
-            </span>
-            <h2 className="text-3xl md:text-5xl font-serif font-bold">How it all connects</h2>
-          </div>
 
-          {/* Vertical flow container */}
-          <div className="relative flex flex-col items-center">
-            
-            {/* The vertical connecting line */}
-            <div className="absolute top-12 bottom-12 w-[2px] border-l-2 border-dashed border-lavender/80 pointer-events-none z-0" />
+        <div className="max-w-4xl mx-auto relative z-10 text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="mb-16 space-y-6"
+          >
+            <span className="inline-block bg-lavender/50 px-4 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wider text-foreground/80 rotate-[-1deg]">
+              Our Foundation
+            </span>
+            <h2 className="text-3xl md:text-5xl font-serif font-bold text-foreground">
+              Built Through Voices, Creativity & Community
+            </h2>
+            <p className="text-base md:text-lg text-foreground/70 max-w-2xl mx-auto font-medium leading-relaxed">
+              The Girlfriend Hour exists through a larger ecosystem of youth-led expression, creativity, emotional safety, and meaningful collaboration.
+            </p>
+          </motion.div>
+
+          {/* Connected Vertical Timeline */}
+          <div className="relative flex flex-col items-center max-w-2xl mx-auto">
+            {/* Dashed Connecting Line */}
+            <div className="absolute top-10 bottom-10 w-[2px] border-l-2 border-dashed border-lavender/60 pointer-events-none z-0" />
 
             {/* LEVEL 1: THE GIRLFRIEND HOUR */}
             <motion.div 
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0, scale: 0.95 }}
+              whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
-              className="relative z-10 w-full text-center pb-12"
+              className="relative z-10 w-full mb-6"
             >
-              <div className="inline-block bg-white p-6 md:p-8 rounded-[2rem] shadow-soft border border-peach/20 max-w-xl mx-auto transition-transform hover:scale-[1.02]">
-                <span className="font-handwritten text-peach text-lg md:text-xl font-bold tracking-wide uppercase block mb-3">
+              <div className="bg-white p-6 md:p-8 rounded-[2rem] shadow-soft border border-peach/25 transition-all hover:shadow-md">
+                <span className="font-handwritten text-peach text-lg md:text-xl font-bold tracking-wide uppercase block mb-2">
                   The Experience
                 </span>
-                <h3 className="text-2xl md:text-3xl font-serif font-bold text-foreground mb-4">
+                <h3 className="text-xl md:text-2xl font-serif font-bold text-foreground mb-2">
                   THE GIRLFRIEND HOUR — “UNFILTERED”
                 </h3>
-                <p className="text-base text-muted-foreground leading-relaxed">
-                  A space where young voices come together through storytelling, music, theatre, conversations, creativity, and expression.
-                </p>
+                
+                {/* Horizontal tags block */}
+                <div className="flex flex-wrap justify-center gap-2 mt-4">
+                  {["Storytelling", "Music", "Theatre", "Expression"].map((tag) => (
+                    <span key={tag} className="bg-peach/10 text-peach px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider">
+                      {tag}
+                    </span>
+                  ))}
+                </div>
               </div>
             </motion.div>
 
-            {/* Connector Wording 1 */}
+            {/* Transition Wording 1 */}
             <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
-              whileInView={{ opacity: 1, scale: 1 }}
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
-              className="relative z-10 my-4 bg-[#FAF6F0] px-4 py-2"
+              className="relative z-10 my-4 bg-[#FAF6F0] px-4 py-1.5 rounded-full border border-border/20 shadow-sm"
             >
-              <span className="font-handwritten text-foreground/50 text-base italic leading-none">
-                Created & organised through:
+              <span className="font-handwritten text-foreground/60 text-sm md:text-base italic">
+                Organised through
               </span>
             </motion.div>
 
             {/* LEVEL 2: KSHRUJAN */}
             <motion.div 
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0, scale: 0.95 }}
+              whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.1 }}
-              className="relative z-10 w-full text-center pb-12"
+              transition={{ duration: 0.6 }}
+              className="relative z-10 w-full mb-6"
             >
-              <div className="inline-block bg-white p-6 md:p-8 rounded-[2rem] shadow-soft border border-sage-green/20 max-w-xl mx-auto transition-transform hover:scale-[1.02]">
-                <span className="font-handwritten text-[#5B8266] text-lg md:text-xl font-bold tracking-wide uppercase block mb-3">
+              <div className="bg-white p-6 md:p-8 rounded-[2rem] shadow-soft border border-sage-green/25 transition-all hover:shadow-md">
+                <span className="font-handwritten text-[#5B8266] text-lg md:text-xl font-bold tracking-wide uppercase block mb-2">
                   Creative Community
                 </span>
-                <h3 className="text-2xl md:text-3xl font-serif font-bold text-foreground mb-4">
+                <h3 className="text-xl md:text-2xl font-serif font-bold text-foreground mb-2">
                   KSHRUJAN
                 </h3>
-                <p className="text-base text-muted-foreground leading-relaxed">
-                  A youth-centered initiative focused on communication, confidence-building, creativity, and meaningful learning experiences.
-                </p>
+
+                {/* Horizontal tags block */}
+                <div className="flex flex-wrap justify-center gap-2 mt-4">
+                  {["Communication", "Creativity", "Confidence", "Collaboration"].map((tag) => (
+                    <span key={tag} className="bg-sage-green/10 text-sage-green px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider">
+                      {tag}
+                    </span>
+                  ))}
+                </div>
               </div>
             </motion.div>
 
-            {/* Connector Wording 2 */}
+            {/* Transition Wording 2 */}
             <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
-              whileInView={{ opacity: 1, scale: 1 }}
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
-              className="relative z-10 my-4 bg-[#FAF6F0] px-4 py-2"
+              className="relative z-10 my-4 bg-[#FAF6F0] px-4 py-1.5 rounded-full border border-border/20 shadow-sm"
             >
-              <span className="font-handwritten text-foreground/50 text-base italic leading-none">
-                Supported as part of:
+              <span className="font-handwritten text-foreground/60 text-sm md:text-base italic">
+                Supported by
               </span>
             </motion.div>
 
             {/* LEVEL 3: UDAYAN CARE FELLOWSHIP PROGRAM */}
             <motion.div 
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0, scale: 0.95 }}
+              whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="relative z-10 w-full text-center"
+              transition={{ duration: 0.6 }}
+              className="relative z-10 w-full"
             >
-              <div className="inline-block bg-white p-6 md:p-8 rounded-[2rem] shadow-soft border border-baby-blue/20 max-w-xl mx-auto transition-transform hover:scale-[1.02]">
-                <span className="font-handwritten text-[#3B66D4] text-lg md:text-xl font-bold tracking-wide uppercase block mb-3">
+              <div className="bg-white p-6 md:p-8 rounded-[2rem] shadow-soft border border-baby-blue/25 transition-all hover:shadow-md">
+                <span className="font-handwritten text-[#3B66D4] text-lg md:text-xl font-bold tracking-wide uppercase block mb-2">
                   Larger Support System
                 </span>
-                <h3 className="text-2xl md:text-3xl font-serif font-bold text-foreground mb-4">
+                <h3 className="text-xl md:text-2xl font-serif font-bold text-foreground mb-2">
                   UDAYAN CARE FELLOWSHIP PROGRAM
                 </h3>
-                <p className="text-base text-muted-foreground leading-relaxed">
-                  A leadership and social impact fellowship supporting young women through mentorship, exposure, community, and growth-oriented experiences.
-                </p>
+
+                {/* Horizontal tags block */}
+                <div className="flex flex-wrap justify-center gap-2 mt-4">
+                  {["Leadership", "Mentorship", "Community", "Growth"].map((tag) => (
+                    <span key={tag} className="bg-baby-blue/10 text-baby-blue px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider">
+                      {tag}
+                    </span>
+                  ))}
+                </div>
               </div>
             </motion.div>
-
           </div>
-        </div>
-      </section>
-
-      {/* SECTION 4 - EXPERIENCE VALUES */}
-      <section className="py-24 px-6 max-w-6xl mx-auto">
-        <div className="text-center mb-16">
-          <span className="inline-block bg-soft-pink/50 px-4 py-1.5 rounded-full text-sm font-medium uppercase tracking-wider mb-4">
-            Core Pillars
-          </span>
-          <h2 className="text-4xl font-serif font-bold">What we stand for</h2>
-        </div>
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {[
-            { title: "Emotional Safety", icon: Heart, color: "bg-soft-pink/30", rotate: "-rotate-2" },
-            { title: "Creativity", icon: Sparkles, color: "bg-baby-blue/30", rotate: "rotate-1" },
-            { title: "Youth Voices", icon: Users, color: "bg-sage-green/30", rotate: "-rotate-1" },
-            { title: "Storytelling", icon: Star, color: "bg-lavender/30", rotate: "rotate-2" },
-            { title: "Confidence", icon: Flame, color: "bg-orange-highlight/20", rotate: "-rotate-2" },
-            { title: "Community", icon: Anchor, color: "bg-peach/30", rotate: "rotate-1" },
-          ].map((val, idx) => (
-            <motion.div
-              key={val.title}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: idx * 0.1 }}
-              whileHover={{ scale: 1.05, rotate: 0 }}
-              className={`p-8 rounded-3xl ${val.color} ${val.rotate} transition-transform duration-300 flex flex-col items-center justify-center text-center gap-4 border border-white/40 shadow-sm`}
-            >
-              <val.icon className="w-8 h-8 opacity-70" />
-              <h3 className="text-xl font-bold font-serif">{val.title}</h3>
-            </motion.div>
-          ))}
         </div>
       </section>
 
