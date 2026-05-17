@@ -62,138 +62,89 @@ export default function ExplorePage() {
       </section>
 
       {/* SECTION 2 - THE ECOSYSTEM */}
-      <section className="py-24 px-6 relative bg-cream/30 overflow-hidden">
+      <section className="py-24 px-6 relative bg-[#FAF6F0] overflow-hidden">
         {/* Subtle decorative grid/dots background */}
         <div className="absolute inset-0 pointer-events-none opacity-20" style={{ backgroundImage: 'radial-gradient(circle at 2px 2px, black 1px, transparent 0)', backgroundSize: '40px 40px' }} />
 
-        <div className="max-w-4xl mx-auto relative z-10 text-center">
+        <div className="max-w-3xl mx-auto relative z-10">
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            className="mb-16 space-y-6"
+            className="text-center mb-16"
           >
-            <span className="inline-block bg-lavender/50 px-4 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wider text-foreground/80 rotate-[-1deg]">
-              Our Foundation
-            </span>
             <h2 className="text-3xl md:text-5xl font-serif font-bold text-foreground">
-              Built Through Voices, Creativity & Community
+              The Spaces Behind This Experience
             </h2>
-            <p className="text-base md:text-lg text-foreground/70 max-w-2xl mx-auto font-medium leading-relaxed">
-              The Girlfriend Hour exists through a larger ecosystem of youth-led expression, creativity, emotional safety, and meaningful collaboration.
-            </p>
           </motion.div>
 
-          {/* Connected Vertical Timeline */}
-          <div className="relative flex flex-col items-center max-w-2xl mx-auto">
-            {/* Dashed Connecting Line */}
-            <div className="absolute top-10 bottom-10 w-[2px] border-l-2 border-dashed border-lavender/60 pointer-events-none z-0" />
+          {/* Simple story timeline flow */}
+          <div className="relative flex flex-col items-center">
+            
+            {/* The simple connecting dashed line */}
+            <div className="absolute top-10 bottom-10 w-[2px] border-l-2 border-dashed border-lavender/40 pointer-events-none z-0" />
 
-            {/* LEVEL 1: THE GIRLFRIEND HOUR */}
+            {/* SPACE 1: THE GIRLFRIEND HOUR */}
             <motion.div 
-              initial={{ opacity: 0, scale: 0.95 }}
-              whileInView={{ opacity: 1, scale: 1 }}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
-              className="relative z-10 w-full mb-6"
+              className="relative z-10 w-full text-center pb-14"
             >
-              <div className="bg-white p-6 md:p-8 rounded-[2rem] shadow-soft border border-peach/25 transition-all hover:shadow-md">
-                <span className="font-handwritten text-peach text-lg md:text-xl font-bold tracking-wide uppercase block mb-2">
-                  The Experience
-                </span>
-                <h3 className="text-xl md:text-2xl font-serif font-bold text-foreground mb-2">
-                  THE GIRLFRIEND HOUR — “UNFILTERED”
+              <div className="inline-block max-w-xl mx-auto transition-transform hover:scale-[1.01]">
+                <h3 className="text-xl md:text-2xl font-serif font-bold text-[#E8612A] mb-3 tracking-wide uppercase">
+                  THE GIRLFRIEND HOUR
                 </h3>
-                
-                {/* Horizontal tags block */}
-                <div className="flex flex-wrap justify-center gap-2 mt-4">
-                  {["Storytelling", "Music", "Theatre", "Expression"].map((tag) => (
-                    <span key={tag} className="bg-peach/10 text-peach px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider">
-                      {tag}
-                    </span>
-                  ))}
-                </div>
+                <p className="text-base text-foreground/80 leading-relaxed font-medium">
+                  A creative micro-culture experience that brings young women together through storytelling, performance, and collaborative expression rooted in empathy, identity, and community.
+                </p>
               </div>
             </motion.div>
 
-            {/* Transition Wording 1 */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
-              className="relative z-10 my-4 bg-[#FAF6F0] px-4 py-1.5 rounded-full border border-border/20 shadow-sm"
-            >
-              <span className="font-handwritten text-foreground/60 text-sm md:text-base italic">
-                Organised through
-              </span>
-            </motion.div>
+            {/* Divider Arrow */}
+            <div className="relative z-10 my-2 text-lavender font-serif text-2xl font-light">↓</div>
 
-            {/* LEVEL 2: KSHRUJAN */}
+            {/* SPACE 2: KSHRUJAN */}
             <motion.div 
-              initial={{ opacity: 0, scale: 0.95 }}
-              whileInView={{ opacity: 1, scale: 1 }}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
-              className="relative z-10 w-full mb-6"
+              className="relative z-10 w-full text-center pb-14"
             >
-              <div className="bg-white p-6 md:p-8 rounded-[2rem] shadow-soft border border-sage-green/25 transition-all hover:shadow-md">
-                <span className="font-handwritten text-[#5B8266] text-lg md:text-xl font-bold tracking-wide uppercase block mb-2">
-                  Creative Community
-                </span>
-                <h3 className="text-xl md:text-2xl font-serif font-bold text-foreground mb-2">
+              <div className="inline-block max-w-xl mx-auto transition-transform hover:scale-[1.01]">
+                <h3 className="text-xl md:text-2xl font-serif font-bold text-[#5B8266] mb-3 tracking-wide uppercase">
                   KSHRUJAN
                 </h3>
-
-                {/* Horizontal tags block */}
-                <div className="flex flex-wrap justify-center gap-2 mt-4">
-                  {["Communication", "Creativity", "Confidence", "Collaboration"].map((tag) => (
-                    <span key={tag} className="bg-sage-green/10 text-sage-green px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider">
-                      {tag}
-                    </span>
-                  ))}
-                </div>
+                <p className="text-base text-foreground/80 leading-relaxed font-medium">
+                  A youth-centered initiative focused on expression, communication, confidence-building, and meaningful learning experiences for students and young adults.
+                </p>
               </div>
             </motion.div>
 
-            {/* Transition Wording 2 */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
-              className="relative z-10 my-4 bg-[#FAF6F0] px-4 py-1.5 rounded-full border border-border/20 shadow-sm"
-            >
-              <span className="font-handwritten text-foreground/60 text-sm md:text-base italic">
-                Supported by
-              </span>
-            </motion.div>
+            {/* Divider Arrow */}
+            <div className="relative z-10 my-2 text-lavender font-serif text-2xl font-light">↓</div>
 
-            {/* LEVEL 3: UDAYAN CARE FELLOWSHIP PROGRAM */}
+            {/* SPACE 3: UDAYAN CARE FELLOWSHIP PROGRAM */}
             <motion.div 
-              initial={{ opacity: 0, scale: 0.95 }}
-              whileInView={{ opacity: 1, scale: 1 }}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
-              className="relative z-10 w-full"
+              className="relative z-10 w-full text-center"
             >
-              <div className="bg-white p-6 md:p-8 rounded-[2rem] shadow-soft border border-baby-blue/25 transition-all hover:shadow-md">
-                <span className="font-handwritten text-[#3B66D4] text-lg md:text-xl font-bold tracking-wide uppercase block mb-2">
-                  Larger Support System
-                </span>
-                <h3 className="text-xl md:text-2xl font-serif font-bold text-foreground mb-2">
+              <div className="inline-block max-w-xl mx-auto transition-transform hover:scale-[1.01]">
+                <h3 className="text-xl md:text-2xl font-serif font-bold text-[#3B66D4] mb-3 tracking-wide uppercase">
                   UDAYAN CARE FELLOWSHIP PROGRAM
                 </h3>
-
-                {/* Horizontal tags block */}
-                <div className="flex flex-wrap justify-center gap-2 mt-4">
-                  {["Leadership", "Mentorship", "Community", "Growth"].map((tag) => (
-                    <span key={tag} className="bg-baby-blue/10 text-baby-blue px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider">
-                      {tag}
-                    </span>
-                  ))}
-                </div>
+                <p className="text-base text-foreground/80 leading-relaxed font-medium">
+                  A leadership and social impact initiative that supports young women through mentorship, education, exposure, and community-based learning experiences.
+                </p>
               </div>
             </motion.div>
+
           </div>
         </div>
       </section>
