@@ -58,7 +58,7 @@ const teamMembers = [
     name: "Riddhi",
     role: "Creative Practitioner",
     quote: "“Bringing storytelling to life, Because expression needs safety.”",
-    image: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&h=500&fit=crop&crop=faces",
+    image: "",
     bgColor: "bg-[#FFF9E8]",
     tapeColor: "rgba(250,220,60,0.65)",
     tapeAngle: -3,
