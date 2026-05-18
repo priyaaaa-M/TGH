@@ -161,7 +161,7 @@ export function HeroSection() {
           }}
         >
           <Image
-            src="/profile_pic/hero-bg.png"
+            src="/profile_pic/hero_pg_new.png"
             alt="Artistic watercolor illustration of diverse young people expressing themselves through music, dance, art, and conversation"
             fill
             className="object-cover object-[60%_30%] sm:object-contain sm:object-center lg:object-right opacity-80"
