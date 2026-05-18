@@ -20,7 +20,7 @@ const teamMembers = [
   },
   {
     name: "Dimple Jogani",
-    role: "Facilitator",
+    role: "Creative Storyteller",
     quote: "“Every sunrise is an invitation to learn something new.”",
     image: "/profile_pic/Dimple Jogani .png",
     bgColor: "bg-[#FFE8D8]",
@@ -32,7 +32,7 @@ const teamMembers = [
   },
   {
     name: "Sourabh Bagree",
-    role: "Facilitator",
+    role: "Creative Storyteller",
     quote: "“Kuch toh log kahenge, logon ka kaam hai kehna.”",
     image: "/profile_pic/Sourabh Bagree.png",
     bgColor: "bg-[#E8F5E8]",
