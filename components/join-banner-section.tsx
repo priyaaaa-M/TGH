@@ -2,10 +2,11 @@
 
 import { motion } from "framer-motion"
 import { ArrowUpRight } from "lucide-react"
-
-const FORM_URL = "https://docs.google.com/forms/d/1ZSUlQS2k2gWhYY2oZmEOwRshBHK-Ml_tfNpdBm17cJk/edit?utm"
+import { useRegisterModal } from "@/components/register-modal-provider"
 
 export function JoinBannerSection() {
+  const { openRegisterModal } = useRegisterModal()
+
   return (
     <section className="py-6 px-4 sm:px-6 lg:px-8 bg-lavender">
       <div className="max-w-7xl mx-auto">
@@ -31,8 +32,8 @@ export function JoinBannerSection() {
           >
             <span className="text-2xl">➡️</span>
             <button
-              onClick={() => window.open(FORM_URL, "_blank")}
-              className="inline-flex items-center gap-2 bg-foreground text-primary-foreground px-6 py-3 rounded-full font-medium hover:bg-foreground/90 transition-all hover:scale-105"
+              onClick={openRegisterModal}
+              className="inline-flex items-center gap-2 bg-foreground text-primary-foreground px-6 py-3 rounded-full font-medium hover:bg-foreground/90 transition-all hover:scale-105 border-2 border-foreground"
             >
               Join the 15-Day Journey
               <ArrowUpRight className="w-4 h-4" />

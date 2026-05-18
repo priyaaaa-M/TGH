@@ -3,8 +3,7 @@
 import { useState, useEffect } from "react"
 import { motion } from "framer-motion"
 import { Check, ArrowUpRight, Heart } from "lucide-react"
-
-const FORM_URL = "https://docs.google.com/forms/d/1ZSUlQS2k2gWhYY2oZmEOwRshBHK-Ml_tfNpdBm17cJk/edit?utm"
+import { useRegisterModal } from "@/components/register-modal-provider"
 
 const safeSpaceItems = [
   "No judgment",
@@ -14,6 +13,7 @@ const safeSpaceItems = [
 ]
 
 export function SafeSpaceSection() {
+  const { openRegisterModal } = useRegisterModal()
   const [timeLeft, setTimeLeft] = useState({
     days: 0,
     hours: 0,
@@ -129,8 +129,8 @@ export function SafeSpaceSection() {
             </p>
 
             <button
-              onClick={() => window.open(FORM_URL, "_blank")}
-              className="inline-flex items-center justify-center gap-2 bg-foreground text-primary-foreground px-6 py-3 rounded-full font-medium hover:bg-foreground/90 transition-all hover:scale-105 mx-auto"
+              onClick={openRegisterModal}
+              className="inline-flex items-center justify-center gap-2 bg-foreground text-primary-foreground px-6 py-3 rounded-full font-medium hover:bg-foreground/90 transition-all hover:scale-105 mx-auto border-2 border-foreground"
             >
               Join the Space
               <ArrowUpRight className="w-4 h-4" />

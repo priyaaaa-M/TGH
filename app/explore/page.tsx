@@ -4,9 +4,10 @@ import { Navbar } from "@/components/navbar"
 import { Footer } from "@/components/footer"
 import { motion } from "framer-motion"
 import { ArrowUpRight, Heart, Sparkles, Star, Users, Flame, Anchor } from "lucide-react"
+import { useRegisterModal } from "@/components/register-modal-provider"
 
 export default function ExplorePage() {
-  const formUrl = "https://docs.google.com/forms/d/1ZSUlQS2k2gWhYY2oZmEOwRshBHK-Ml_tfNpdBm17cJk/edit?utm"
+  const { openRegisterModal } = useRegisterModal()
 
   return (
     <main className="min-h-screen bg-cream selection:bg-lavender selection:text-foreground overflow-x-hidden">
@@ -35,8 +36,8 @@ export default function ExplorePage() {
               Built through storytelling, creativity, emotional safety, and youth-led expression.
             </p>
             <button 
-              onClick={() => window.open(formUrl, "_blank")}
-              className="inline-flex items-center gap-2 bg-foreground text-primary-foreground px-8 py-4 rounded-full font-medium hover:bg-foreground/90 transition-all hover:scale-105 active:scale-95 shadow-soft"
+              onClick={openRegisterModal}
+              className="inline-flex items-center gap-2 bg-foreground text-primary-foreground px-8 py-4 rounded-full font-medium hover:bg-foreground/90 transition-all hover:scale-105 active:scale-95 shadow-soft border-2 border-foreground"
             >
               Join The Space
               <ArrowUpRight className="w-5 h-5" />

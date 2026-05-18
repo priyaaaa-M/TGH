@@ -4,8 +4,7 @@ import { useState, useEffect } from "react"
 import Link from "next/link"
 import { motion, AnimatePresence } from "framer-motion"
 import { Menu, X, Sparkles } from "lucide-react"
-
-const FORM_URL = "https://docs.google.com/forms/d/1ZSUlQS2k2gWhYY2oZmEOwRshBHK-Ml_tfNpdBm17cJk/edit?utm"
+import { useRegisterModal } from "@/components/register-modal-provider"
 
 const navItems = [
   { name: "Home", href: "/" },
@@ -19,6 +18,7 @@ const navItems = [
 export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const { openRegisterModal } = useRegisterModal()
 
   useEffect(() => {
     const handleScroll = () => {
@@ -69,7 +69,7 @@ export function Navbar() {
           <div className="hidden md:flex items-center gap-3">
             <Sparkles className="w-4 h-4 text-pastel-yellow" />
             <button
-              onClick={() => window.open(FORM_URL, "_blank")}
+              onClick={openRegisterModal}
               className="bg-foreground text-primary-foreground px-5 py-2.5 rounded-full text-sm font-medium hover:bg-foreground/90 transition-colors hover:scale-105"
             >
               Join the Space
@@ -123,7 +123,7 @@ export function Navbar() {
                 className="pt-6"
               >
                 <button
-                    onClick={() => { window.open(FORM_URL, "_blank"); setIsMobileMenuOpen(false) }}
+                    onClick={() => { openRegisterModal(); setIsMobileMenuOpen(false) }}
                     className="block w-full text-center bg-foreground text-primary-foreground px-6 py-4 rounded-full text-base font-medium shadow-soft"
                   >
                     Join the Space

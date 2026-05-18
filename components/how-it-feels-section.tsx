@@ -199,7 +199,7 @@ export function HowItFeelsSection() {
               {/* Photo */}
               <div className="relative aspect-[4/5] bg-cream overflow-hidden">
                 <Image
-                  src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=400&h=500&fit=crop&crop=faces"
+                  src="/IMG_fol/img1.png"
                   alt="Friends sharing a warm, candid moment together"
                   fill
                   className="object-cover"

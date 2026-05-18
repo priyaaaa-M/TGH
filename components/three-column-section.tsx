@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { Mic, Play, ArrowUpRight, Send, X, Square, Loader2 } from "lucide-react"
 import { db, auth } from "@/lib/firebase"
+import { useRegisterModal } from "@/components/register-modal-provider"
 import { collection, query, orderBy, onSnapshot, addDoc, serverTimestamp, limit, doc, updateDoc, increment, getDoc, setDoc } from "firebase/firestore"
 
 interface VoiceNote {
@@ -28,6 +29,7 @@ const pollOptions = [
 ]
 
 export function ThreeColumnSection() {
+  const { openRegisterModal } = useRegisterModal()
   const [votedOption, setVotedOption] = useState<string | null>(null)
   const [pollData, setPollData] = useState<any>(null)
   const [isPollLoading, setIsPollLoading] = useState(true)
@@ -332,8 +334,8 @@ export function ThreeColumnSection() {
 
             <div className="space-y-3">
               <button 
-                onClick={() => window.open("https://docs.google.com/forms/d/1ZSUlQS2k2gWhYY2oZmEOwRshBHK-Ml_tfNpdBm17cJk/edit?utm", "_blank")}
-                className="w-full flex items-center justify-center gap-2 bg-foreground text-primary-foreground px-5 py-3 rounded-full font-medium hover:bg-foreground/90 transition-all"
+                onClick={openRegisterModal}
+                className="w-full flex items-center justify-center gap-2 bg-foreground text-primary-foreground px-5 py-3 rounded-full font-medium hover:bg-foreground/90 transition-all border-2 border-foreground"
               >
                 Submit Anonymously
                 <ArrowUpRight className="w-4 h-4" />
@@ -396,9 +398,15 @@ export function ThreeColumnSection() {
                   ))}
                 </div>
               ) : voiceNotes.length === 0 && !isUploading ? (
-                <p className="text-center text-sm text-muted-foreground py-8">
-                  No voice notes yet. Be the first!
-                </p>
+                <div className="text-center py-10 px-4 border-2 border-dashed border-foreground/10 rounded-2xl bg-cream/35">
+                  <div className="text-3xl mb-2">🎙️</div>
+                  <p className="text-sm font-bold text-foreground/80">
+                    No voice notes shared yet.
+                  </p>
+                  <p className="text-xs text-muted-foreground mt-1 font-handwritten font-medium">
+                    be the very first to whisper your truth...
+                  </p>
+                </div>
               ) : (
                 <>
                   {isUploading && (
@@ -459,7 +467,10 @@ export function ThreeColumnSection() {
               )}
             </div>
 
-            <button className="mt-4 text-sm text-orange-highlight font-medium hover:underline flex items-center gap-1">
+            <button 
+              onClick={openRegisterModal}
+              className="mt-4 text-sm text-orange-highlight font-bold hover:underline flex items-center gap-1"
+            >
               Hear more voices
               <ArrowUpRight className="w-3 h-3" />
             </button>
@@ -512,9 +523,9 @@ export function ThreeColumnSection() {
                       />
                     )}
 
-                    <div className="relative z-10 flex items-center justify-between">
-                      <span className={`text-sm font-medium transition-colors ${
-                        votedOption === option.id ? "text-foreground font-bold" : "text-foreground/80"
+                    <div className="relative z-10 flex items-center justify-between gap-4">
+                      <span className={`text-sm font-medium transition-colors flex-1 text-left ${
+                        votedOption === option.id ? "text-foreground font-bold" : "text-foreground/85"
                       }`}>
                         {option.label}
                       </span>
@@ -522,7 +533,7 @@ export function ThreeColumnSection() {
                         <motion.span
                           initial={{ opacity: 0 }}
                           animate={{ opacity: 1 }}
-                          className="text-xs font-bold font-serif text-foreground/40"
+                          className="text-xs font-bold font-serif text-foreground/50 shrink-0"
                         >
                           {percentage}%
                         </motion.span>

@@ -4,13 +4,13 @@ import { useState, useEffect, useCallback, useRef } from "react"
 import { motion, AnimatePresence, PanInfo } from "framer-motion"
 import { Play, Heart, Star, Sparkles } from "lucide-react"
 import Image from "next/image"
-
-const FORM_URL = "https://docs.google.com/forms/d/1ZSUlQS2k2gWhYY2oZmEOwRshBHK-Ml_tfNpdBm17cJk/edit?utm"
+import { useIsMobile } from "@/hooks/use-mobile"
+import { useRegisterModal } from "@/components/register-modal-provider"
 
 const polaroids = [
   {
     // friends sitting in circle, deep conversation
-    img: "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=400&h=500&fit=crop&crop=center",
+    img: "/IMG_fol/img2.png",
     caption: "real conversations that matter. 🫂",
     tapeColor: "bg-pastel-yellow/80",
     tapeAngle: "-rotate-3",
@@ -20,7 +20,7 @@ const polaroids = [
   },
   {
     // open mic / poetry performance on stage
-    img: "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=400&h=500&fit=crop&crop=center",
+    img: "/IMG_fol/img3.png",
     caption: "say it loudly. 🎤",
     tapeColor: "bg-soft-pink/80",
     tapeAngle: "rotate-2",
@@ -30,7 +30,7 @@ const polaroids = [
   },
   {
     // group playing guitar and singing together
-    img: "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=400&h=500&fit=crop&crop=center",
+    img: "/IMG_fol/img4.png",
     caption: "music heals softly. 🎸",
     tapeColor: "bg-lavender/80",
     tapeAngle: "-rotate-1",
@@ -40,7 +40,7 @@ const polaroids = [
   },
   {
     // brainstorming / creative session on laptops
-    img: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=400&h=500&fit=crop&crop=center",
+    img: "/IMG_fol/img5.png",
     caption: "building things together. 💻",
     tapeColor: "bg-baby-blue/80",
     tapeAngle: "rotate-4",
@@ -50,7 +50,7 @@ const polaroids = [
   },
   {
     // people dancing freely at a workshop
-    img: "https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?w=400&h=500&fit=crop&crop=center",
+    img: "/IMG_fol/img6.png",
     caption: "move how you feel. 🕺",
     tapeColor: "bg-peach/80",
     tapeAngle: "-rotate-2",
@@ -60,9 +60,9 @@ const polaroids = [
   },
   {
     // people painting / journaling together
-    img: "https://images.unsplash.com/photo-1456324504439-367cee3b3c32?w=400&h=500&fit=crop&crop=center",
+    img: "/IMG_fol/img7.png",
     caption: "creating without fear. 🎨",
-    tapeColor: "bg-sage/80",
+    tapeColor: "bg-[#b3d9d3]/80",
     tapeAngle: "rotate-1",
     rotation: -1,
     doodle: "star",
@@ -70,7 +70,7 @@ const polaroids = [
   },
   {
     // group hug / emotional support moment
-    img: "https://images.unsplash.com/photo-1517457373958-b7bdd4587205?w=400&h=500&fit=crop&crop=center",
+    img: "/IMG_fol/img8.png",
     caption: "safe. seen. supported. 🤍",
     tapeColor: "bg-soft-pink/80",
     tapeAngle: "-rotate-3",
@@ -78,10 +78,19 @@ const polaroids = [
     doodle: "heart",
     alt: "Young people sharing a warm group hug and emotional support moment",
   },
+  {
+    // unfiltered moment
+    img: "/IMG_fol/img9.png",
+    caption: "unfiltered magic. ✨",
+    tapeColor: "bg-lavender/80",
+    tapeAngle: "rotate-3",
+    rotation: -2,
+    doodle: "sparkles",
+    alt: "Young people expressing themselves freely in an unfiltered moment",
+  },
 ]
 
-const CARDS_VISIBLE = 4
-const TOTAL_SLIDES = Math.ceil(polaroids.length / CARDS_VISIBLE)
+// Responsive variables will be computed inside the component dynamically
 
 const doodleMap: Record<string, React.ReactNode> = {
   star: <Star className="w-4 h-4 text-pastel-yellow fill-pastel-yellow" />,
@@ -92,9 +101,24 @@ const doodleMap: Record<string, React.ReactNode> = {
 }
 
 export function BehindTheScenesSection() {
+  const { openRegisterModal } = useRegisterModal()
+  const isMobile = useIsMobile()
+  const [windowWidth, setWindowWidth] = useState(typeof window !== "undefined" ? window.innerWidth : 1200)
+
+  useEffect(() => {
+    const handleResize = () => setWindowWidth(window.innerWidth)
+    window.addEventListener("resize", handleResize)
+    return () => window.removeEventListener("resize", handleResize)
+  }, [])
+
+  const cardsVisible = isMobile ? 1 : (windowWidth < 1024 ? 2 : 4)
+  const totalSlides = Math.ceil(polaroids.length / cardsVisible)
+
   const [active, setActive] = useState(0)
   const [direction, setDirection] = useState(0)
   const [isPaused, setIsPaused] = useState(false)
+
+  const activeSlide = Math.min(active, totalSlides - 1)
 
   const goTo = useCallback(
     (idx: number) => {
@@ -106,13 +130,19 @@ export function BehindTheScenesSection() {
 
   const next = useCallback(() => {
     setDirection(1)
-    setActive((p) => (p + 1) % TOTAL_SLIDES)
-  }, [])
+    setActive((p) => {
+      const nextSlide = p + 1
+      return nextSlide >= totalSlides ? 0 : nextSlide
+    })
+  }, [totalSlides])
 
   const prev = useCallback(() => {
     setDirection(-1)
-    setActive((p) => (p - 1 + TOTAL_SLIDES) % TOTAL_SLIDES)
-  }, [])
+    setActive((p) => {
+      const prevSlide = p - 1
+      return prevSlide < 0 ? totalSlides - 1 : prevSlide
+    })
+  }, [totalSlides])
 
   useEffect(() => {
     if (isPaused) return
@@ -125,9 +155,9 @@ export function BehindTheScenesSection() {
     else if (info.offset.x > 60) prev()
   }
 
-  const visibleCards = polaroids.slice(active * CARDS_VISIBLE, active * CARDS_VISIBLE + CARDS_VISIBLE)
+  const visibleCards = polaroids.slice(activeSlide * cardsVisible, activeSlide * cardsVisible + cardsVisible)
   // peek card from next group
-  const peekCard = polaroids[(active * CARDS_VISIBLE + CARDS_VISIBLE) % polaroids.length]
+  const peekCard = polaroids[(activeSlide * cardsVisible + cardsVisible) % polaroids.length]
 
   const variants = {
     enter: (d: number) => ({ x: d > 0 ? 500 : -500, opacity: 0, scale: 0.95 }),
@@ -201,7 +231,7 @@ export function BehindTheScenesSection() {
 
             {/* CTA */}
             <button
-              onClick={() => window.open(FORM_URL, "_blank")}
+              onClick={openRegisterModal}
               className="inline-flex items-center gap-2 border-2 border-foreground px-6 py-3 rounded-full font-medium hover:bg-foreground hover:text-primary-foreground transition-all hover:scale-105 group"
             >
               Watch BTS
@@ -210,7 +240,7 @@ export function BehindTheScenesSection() {
 
             {/* Pagination dots */}
             <div className="flex items-center gap-2.5 pt-2">
-              {Array.from({ length: TOTAL_SLIDES }).map((_, i) => (
+              {Array.from({ length: totalSlides }).map((_, i) => (
                 <button
                   key={i}
                   onClick={() => goTo(i)}
@@ -219,9 +249,9 @@ export function BehindTheScenesSection() {
                 >
                   <motion.div
                     animate={{
-                      scale: active === i ? 1.4 : 1,
-                      backgroundColor: active === i ? "#1a1a1a" : "#c4c4c4",
-                      width: active === i ? 20 : 8,
+                      scale: activeSlide === i ? 1.4 : 1,
+                      backgroundColor: activeSlide === i ? "#1a1a1a" : "#c4c4c4",
+                      width: activeSlide === i ? 20 : 8,
                     }}
                     transition={{ type: "spring", stiffness: 400, damping: 25 }}
                     className="h-2 rounded-full"
@@ -248,7 +278,7 @@ export function BehindTheScenesSection() {
             >
               <AnimatePresence mode="wait" custom={direction}>
                 <motion.div
-                  key={active}
+                  key={activeSlide}
                   custom={direction}
                   variants={variants}
                   initial="enter"
@@ -259,12 +289,12 @@ export function BehindTheScenesSection() {
                   style={{ userSelect: "none" }}
                 >
                   {visibleCards.map((card, idx) => (
-                    <PolaroidCard key={card.caption} card={card} idx={idx} />
+                    <PolaroidCard key={card.caption} card={card} idx={idx} cardsVisible={cardsVisible} />
                   ))}
 
                   {/* Peek card (partially visible) */}
                   <div className="flex-shrink-0 w-[80px] md:w-[100px] overflow-hidden rounded-sm">
-                    <PolaroidCard card={peekCard} idx={visibleCards.length} peek />
+                    <PolaroidCard card={peekCard} idx={visibleCards.length} cardsVisible={cardsVisible} peek />
                   </div>
                 </motion.div>
               </AnimatePresence>
@@ -282,10 +312,12 @@ export function BehindTheScenesSection() {
 function PolaroidCard({
   card,
   idx,
+  cardsVisible = 4,
   peek = false,
 }: {
   card: (typeof polaroids)[0]
   idx: number
+  cardsVisible?: number
   peek?: boolean
 }) {
   return (
@@ -305,7 +337,7 @@ function PolaroidCard({
       }
       className="relative bg-white flex-shrink-0 flex-grow-0"
       style={{
-        width: peek ? "100%" : "calc(25% - 12px)",
+        width: peek ? "100%" : `calc(${100 / cardsVisible}% - 12px)`,
         minWidth: peek ? undefined : "140px",
         padding: "10px 10px 40px 10px",
         borderRadius: "2px",

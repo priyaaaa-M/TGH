@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { Inter, Playfair_Display, Caveat } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
+import { RegisterModalProvider } from '@/components/register-modal-provider'
 import './globals.css'
 
 const inter = Inter({ 
@@ -32,7 +33,9 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${inter.variable} ${playfair.variable} ${caveat.variable} bg-[#F8F4EE]`} suppressHydrationWarning>
       <body className="font-sans antialiased bg-[#F8F4EE] text-foreground">
-        {children}
+        <RegisterModalProvider>
+          {children}
+        </RegisterModalProvider>
         {process.env.NODE_ENV === 'production' && <Analytics />}
       </body>
     </html>

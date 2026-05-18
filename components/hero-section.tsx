@@ -4,10 +4,11 @@ import { motion } from "framer-motion"
 import { ArrowUpRight, Star, Heart, Sparkles } from "lucide-react"
 import Link from "next/link"
 import Image from "next/image"
-
-const FORM_URL = "https://docs.google.com/forms/d/1ZSUlQS2k2gWhYY2oZmEOwRshBHK-Ml_tfNpdBm17cJk/edit?utm"
+import { useRegisterModal } from "@/components/register-modal-provider"
 
 export function HeroSection() {
+  const { openRegisterModal } = useRegisterModal()
+
   return (
     <section className="relative min-h-[85dvh] lg:min-h-screen pt-20 md:pt-32 pb-8 md:pb-12 overflow-hidden flex flex-col justify-between lg:block">
       {/* Floating Doodles */}
@@ -96,17 +97,18 @@ export function HeroSection() {
             className="flex flex-row items-center justify-center lg:justify-start gap-3 md:gap-4 mb-6"
           >
             <button
-              onClick={() => window.open(FORM_URL, "_blank")}
+              onClick={openRegisterModal}
               className="inline-flex justify-center items-center gap-2 bg-foreground text-primary-foreground px-5 py-2.5 lg:px-6 lg:py-3 rounded-[1.25rem] text-sm lg:text-base font-medium hover:bg-foreground/90 transition-all hover:scale-105 shadow-soft"
             >
               Join the Space
               <ArrowUpRight className="w-3.5 h-3.5 lg:w-4 lg:h-4" />
             </button>
-            <Link href="/explore" passHref>
-              <button className="inline-flex justify-center items-center gap-2 bg-white/50 backdrop-blur-sm border border-foreground/20 text-foreground px-5 py-2.5 lg:px-6 lg:py-3 rounded-[1.25rem] text-sm lg:text-base font-medium hover:bg-foreground/5 transition-all hover:scale-105 shadow-sm">
-                Explore Stories
-                <ArrowUpRight className="w-3.5 h-3.5 lg:w-4 lg:h-4" />
-              </button>
+            <Link
+              href="/explore"
+              className="inline-flex justify-center items-center gap-2 bg-white/50 backdrop-blur-sm border border-foreground/20 text-foreground px-5 py-2.5 lg:px-6 lg:py-3 rounded-[1.25rem] text-sm lg:text-base font-medium hover:bg-foreground/5 transition-all hover:scale-105 shadow-sm"
+            >
+              Explore Stories
+              <ArrowUpRight className="w-3.5 h-3.5 lg:w-4 lg:h-4" />
             </Link>
           </motion.div>
 
