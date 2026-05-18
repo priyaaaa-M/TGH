@@ -165,7 +165,7 @@ export default function ExplorePage() {
                 <div className="bg-white p-3 pb-8 rounded-[4px] shadow-lg w-full max-w-sm border border-foreground/5 transform -rotate-1 hover:rotate-0 transition-transform">
                   <div className="relative aspect-[4/3] bg-cream overflow-hidden">
                     <Image
-                      src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=600&h=450&fit=crop"
+                      src="/IMG_fol/img2.png"
                       alt="The Girlfriend Hour"
                       fill
                       className="object-cover"
@@ -210,10 +210,10 @@ export default function ExplorePage() {
                 <div className="bg-white p-3 pb-8 rounded-[4px] shadow-lg w-full max-w-sm border border-foreground/5 transform rotate-1 hover:rotate-0 transition-transform">
                   <div className="relative aspect-[4/3] bg-cream overflow-hidden">
                     <Image
-                      src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=600&h=450&fit=crop"
-                      alt="Kshrujan Leadership"
+                      src="/profile_pic/kshrujan.png"
+                      alt="Kshrujan Logo"
                       fill
-                      className="object-cover"
+                      className="object-contain p-4"
                     />
                   </div>
                   <p className="font-handwritten text-sm text-center text-foreground/75 mt-3">collaboration and community. 🌱</p>
@@ -255,10 +255,10 @@ export default function ExplorePage() {
                 <div className="bg-white p-3 pb-8 rounded-[4px] shadow-lg w-full max-w-sm border border-foreground/5 transform -rotate-2 hover:rotate-0 transition-transform">
                   <div className="relative aspect-[4/3] bg-cream overflow-hidden">
                     <Image
-                      src="https://images.unsplash.com/photo-1517457373958-b7bdd4587205?w=600&h=450&fit=crop"
-                      alt="Udayan Care Fellowship"
+                      src="/profile_pic/usf .png"
+                      alt="Udayan Care Fellowship Logo"
                       fill
-                      className="object-cover"
+                      className="object-contain p-4"
                     />
                   </div>
                   <p className="font-handwritten text-sm text-center text-foreground/75 mt-3">fellowship that empowers. 💫</p>
