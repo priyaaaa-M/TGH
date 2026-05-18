@@ -3,315 +3,271 @@
 import { Navbar } from "@/components/navbar"
 import { Footer } from "@/components/footer"
 import { motion } from "framer-motion"
-import { ArrowUpRight, Heart, Sparkles, Star, Users, Flame, Anchor } from "lucide-react"
-import { useRegisterModal } from "@/components/register-modal-provider"
+import { Heart, Sparkles, Star } from "lucide-react"
+import Image from "next/image"
 
 export default function ExplorePage() {
-  const { openRegisterModal } = useRegisterModal()
-
   return (
-    <main className="min-h-screen bg-cream selection:bg-lavender selection:text-foreground overflow-x-hidden">
+    <main className="min-h-screen bg-[#F8F4EE] selection:bg-lavender selection:text-foreground overflow-x-hidden">
       <Navbar />
 
-      {/* SECTION 1 - HERO */}
-      <section className="relative pt-32 pb-20 md:pt-40 md:pb-32 px-6 overflow-hidden">
-        <div className="max-w-4xl mx-auto text-center relative z-10">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-          >
-            <span className="inline-block bg-peach/50 px-4 py-1.5 rounded-full text-sm font-medium uppercase tracking-wider mb-6 rotate-[-2deg]">
-              Our Ecosystem
-            </span>
-            <h1 className="text-4xl md:text-6xl lg:text-7xl font-serif font-bold leading-tight mb-8">
-              More than an event.<br />
-              <span className="italic text-sage-green relative inline-block">
-                A space to feel,
-                <svg className="absolute w-full h-3 -bottom-1 left-0 text-sage-green/30" viewBox="0 0 100 10" preserveAspectRatio="none"><path d="M0 5 Q 50 10 100 5" stroke="currentColor" strokeWidth="4" fill="none"/></svg>
-              </span>{" "}
-              express, and belong.
-            </h1>
-            <p className="text-lg md:text-xl text-foreground/80 max-w-2xl mx-auto mb-10 font-medium">
-              Built through storytelling, creativity, emotional safety, and youth-led expression.
-            </p>
-            <button 
-              onClick={openRegisterModal}
-              className="inline-flex items-center gap-2 bg-foreground text-primary-foreground px-8 py-4 rounded-full font-medium hover:bg-foreground/90 transition-all hover:scale-105 active:scale-95 shadow-soft border-2 border-foreground"
+      {/* SECTION 1 - CINEMATIC STORYTELLING HERO */}
+      <section className="relative pt-32 pb-20 md:pt-40 md:pb-32 px-6">
+        {/* Soft elegant gradient glow */}
+        <div className="absolute top-0 left-1/4 right-1/4 h-[500px] bg-gradient-to-b from-[#FFF4F0] via-[#F8F4EE]/50 to-transparent blur-[120px] pointer-events-none" />
+
+        <div className="max-w-6xl mx-auto grid lg:grid-cols-12 gap-12 items-center relative z-10">
+          {/* Hero Left: Stories Headline */}
+          <div className="lg:col-span-6 text-left space-y-6">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+              className="space-y-4"
             >
-              Join The Space
-              <ArrowUpRight className="w-5 h-5" />
-            </button>
-          </motion.div>
-        </div>
-
-        {/* Decorative elements */}
-        <motion.div 
-          animate={{ y: [0, -10, 0], rotate: [0, 5, 0] }}
-          transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute top-40 left-[10%] md:left-[20%] text-4xl text-peach/60"
-        >
-          <Sparkles />
-        </motion.div>
-        <motion.div 
-          animate={{ y: [0, 15, 0], rotate: [0, -10, 0] }}
-          transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-          className="absolute bottom-20 right-[10%] md:right-[20%] text-5xl text-baby-blue/60"
-        >
-          <Heart fill="currentColor" />
-        </motion.div>
-      </section>
-
-      {/* SECTION 2 - THE ECOSYSTEM */}
-      <section className="py-28 px-6 relative bg-[#FAF6F0] overflow-hidden">
-        {/* Subtle decorative grid/dots background */}
-        <div className="absolute inset-0 pointer-events-none opacity-20" style={{ backgroundImage: 'radial-gradient(circle at 2px 2px, black 1px, transparent 0)', backgroundSize: '40px 40px' }} />
-
-        {/* Decorative background illustrations (floating shapes) */}
-        <div className="absolute top-20 left-[5%] text-soft-pink opacity-20 animate-pulse pointer-events-none">
-          <Heart className="w-16 h-16 fill-current" />
-        </div>
-        <div className="absolute bottom-20 right-[5%] text-lavender opacity-20 animate-pulse pointer-events-none">
-          <Sparkles className="w-20 h-20 fill-current" />
-        </div>
-
-        <div className="max-w-5xl mx-auto relative z-10">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-            className="text-center mb-24 space-y-4"
-          >
-            <span className="font-handwritten text-lavender text-xl md:text-2xl tracking-wide inline-block transform -rotate-1">
-              Our Foundations
-            </span>
-            <h2 className="text-3xl md:text-5xl font-serif font-bold text-foreground">
-              The Spaces Behind This Experience
-            </h2>
-          </motion.div>
-
-          {/* Staggered Timeline Flow */}
-          <div className="relative flex flex-col items-stretch max-w-4xl mx-auto space-y-16 md:space-y-24">
-            
-            {/* Soft connecting dotted pathway */}
-            <div className="absolute left-1/2 top-10 bottom-10 w-[2px] border-l-2 border-dashed border-lavender/40 pointer-events-none z-0 hidden md:block -translate-x-1/2" />
-
-            {/* SPACE 1: THE GIRLFRIEND HOUR (Staggered Left) */}
-            <motion.div 
-              initial={{ opacity: 0, x: -50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 0.7 }}
-              className="relative z-10 w-full md:w-[70%] md:self-start group"
-            >
-              <div 
-                className="bg-[#FFF4F0] border border-[#FFD9CE] p-8 md:p-10 rounded-[2.5rem] shadow-soft relative transition-all duration-300 hover:shadow-xl hover:scale-[1.02] cursor-default"
-                style={{ transform: "rotate(-1.5deg)" }}
-              >
-                {/* Scrapbook Tape */}
-                <div 
-                  className="absolute -top-2.5 left-1/2 -translate-x-1/2 w-16 h-5 rounded-[2px] shadow-sm z-20"
-                  style={{
-                    background: "rgba(255, 180, 160, 0.65)",
-                    transform: "translateX(-50%) rotate(-4deg)"
-                  }}
-                />
-
-                {/* Mini handwritten label */}
-                <span className="font-handwritten text-[#E8612A] text-lg md:text-xl font-bold tracking-wide uppercase block mb-3">
-                  The Experience
+              <span className="inline-block bg-peach/40 border border-peach/50 px-4 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wider text-foreground/80 rotate-[-1deg]">
+                The Journey of Expression
+              </span>
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-serif font-bold leading-[1.1] text-foreground">
+                More than an event.<br />
+                <span className="font-handwritten text-[#E8612A] font-normal block mt-2 text-5xl sm:text-6xl lg:text-7xl">
+                  A shared universe.
                 </span>
-
-                <h3 className="text-2xl md:text-3xl font-serif font-bold text-foreground mb-4">
-                  THE GIRLFRIEND HOUR
-                </h3>
-                
-                <p className="text-base text-foreground/85 leading-relaxed font-medium">
-                  A creative micro-culture experience that brings young women together through storytelling, performance, and collaborative expression rooted in empathy, identity, and community.
-                </p>
-
-                {/* Floating Doodle */}
-                <div className="absolute -top-6 -right-6 text-4xl opacity-50 group-hover:opacity-100 group-hover:scale-125 transition-all duration-300 pointer-events-none z-30">
-                  💖
-                </div>
-              </div>
+              </h1>
             </motion.div>
 
-            {/* SPACE 2: KSHRUJAN (Staggered Right) */}
-            <motion.div 
-              initial={{ opacity: 0, x: 50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 0.7 }}
-              className="relative z-10 w-full md:w-[70%] md:self-end group"
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.1 }}
+              className="text-lg md:text-xl text-foreground/85 font-medium leading-relaxed max-w-xl"
             >
-              <div 
-                className="bg-[#F3F8F4] border border-[#D5EAD8] p-8 md:p-10 rounded-[2.5rem] shadow-soft relative transition-all duration-300 hover:shadow-xl hover:scale-[1.02] cursor-default"
-                style={{ transform: "rotate(1.2deg)" }}
-              >
-                {/* Scrapbook Tape */}
-                <div 
-                  className="absolute -top-2.5 left-1/2 -translate-x-1/2 w-16 h-5 rounded-[2px] shadow-sm z-20"
-                  style={{
-                    background: "rgba(190, 225, 200, 0.65)",
-                    transform: "translateX(-50%) rotate(3deg)"
-                  }}
-                />
+              Unfiltered is born at the intersection of individual truth and collaborative empathy. It is where young voices explore their identity and shape their narratives freely.
+            </motion.p>
 
-                {/* Mini handwritten label */}
-                <span className="font-handwritten text-[#5B8266] text-lg md:text-xl font-bold tracking-wide uppercase block mb-3">
-                  Organising & Shaping
-                </span>
-
-                <h3 className="text-2xl md:text-3xl font-serif font-bold text-foreground mb-4">
-                  KSHRUJAN
-                </h3>
-                
-                <p className="text-base text-foreground/85 leading-relaxed font-medium">
-                  A youth-centered initiative focused on expression, communication, confidence-building, and meaningful learning experiences for students and young adults.
-                </p>
-
-                {/* Floating Doodle */}
-                <div className="absolute -bottom-6 -left-6 text-4xl opacity-50 group-hover:opacity-100 group-hover:scale-125 transition-all duration-300 pointer-events-none z-30">
-                  🌱
-                </div>
-              </div>
-            </motion.div>
-
-            {/* SPACE 3: UDAYAN CARE FELLOWSHIP PROGRAM (Staggered Left) */}
-            <motion.div 
-              initial={{ opacity: 0, x: -50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 0.7 }}
-              className="relative z-10 w-full md:w-[70%] md:self-start group"
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.3 }}
+              className="flex items-center gap-3 pt-2 text-foreground/60 text-sm font-handwritten italic"
             >
-              <div 
-                className="bg-[#F2F4FC] border border-[#D3DBFA] p-8 md:p-10 rounded-[2.5rem] shadow-soft relative transition-all duration-300 hover:shadow-xl hover:scale-[1.02] cursor-default"
-                style={{ transform: "rotate(-1deg)" }}
-              >
-                {/* Scrapbook Tape */}
-                <div 
-                  className="absolute -top-2.5 left-1/2 -translate-x-1/2 w-16 h-5 rounded-[2px] shadow-sm z-20"
-                  style={{
-                    background: "rgba(180, 195, 250, 0.65)",
-                    transform: "translateX(-50%) rotate(-2deg)"
-                  }}
-                />
-
-                {/* Mini handwritten label */}
-                <span className="font-handwritten text-[#3B66D4] text-lg md:text-xl font-bold tracking-wide uppercase block mb-3">
-                  The Support System
-                </span>
-
-                <h3 className="text-2xl md:text-3xl font-serif font-bold text-foreground mb-4">
-                  UDAYAN CARE FELLOWSHIP PROGRAM
-                </h3>
-                
-                <p className="text-base text-foreground/85 leading-relaxed font-medium">
-                  A leadership and social impact initiative that supports young women through mentorship, education, exposure, and community-based learning experiences.
-                </p>
-
-                {/* Floating Doodle */}
-                <div className="absolute -top-6 -left-6 text-4xl opacity-50 group-hover:opacity-100 group-hover:scale-125 transition-all duration-300 pointer-events-none z-30">
-                  💫
-                </div>
-              </div>
+              <Heart className="w-4 h-4 text-soft-pink fill-soft-pink animate-pulse" />
+              <span>curated by many hearts, speaking as one.</span>
             </motion.div>
-
           </div>
+
+          {/* Hero Right: Premium Polaroid / Cinematic Frame displaying /profile_pic/hero_pg_new.png */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95, rotate: 2 }}
+            animate={{ opacity: 1, scale: 1, rotate: 1 }}
+            transition={{ duration: 1, delay: 0.2 }}
+            whileHover={{ scale: 1.02, rotate: -0.5 }}
+            className="lg:col-span-6 relative flex justify-center z-10"
+          >
+            {/* Scrapbook Tape top center */}
+            <div className="absolute -top-3 left-1/2 -translate-x-1/2 w-20 h-6 bg-pastel-yellow/85 rounded-sm transform -rotate-1 shadow-sm z-20" />
+
+            {/* Polaroid Zine Border */}
+            <div className="bg-white p-4 pb-14 rounded-[4px] shadow-2xl w-full max-w-md border border-foreground/5 transform rotate-1">
+              <div className="relative aspect-[4/5] bg-cream rounded-sm overflow-hidden border border-foreground/10">
+                <Image
+                  src="/profile_pic/hero_pg_new.png"
+                  alt="The Girlfriend Hour Unfiltered Storytelling"
+                  fill
+                  className="object-cover"
+                  priority
+                />
+                {/* Soft feminine gradient blending */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent" />
+              </div>
+              {/* Polaroid Caption */}
+              <div className="pt-4 text-center">
+                <p className="font-handwritten text-lg md:text-xl text-foreground/85">
+                  unfiltered. unapologetic. raw. ✨
+                </p>
+              </div>
+            </div>
+
+            {/* Floating Doodles */}
+            <motion.div
+              animate={{ y: [0, -6, 0] }}
+              transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut" }}
+              className="absolute -bottom-6 -left-6 text-5xl select-none opacity-80"
+            >
+              🌸
+            </motion.div>
+            <motion.div
+              animate={{ rotate: [0, 360] }}
+              transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
+              className="absolute -top-6 -right-6 text-pastel-yellow"
+            >
+              <Star className="w-8 h-8 fill-pastel-yellow" />
+            </motion.div>
+          </motion.div>
         </div>
       </section>
 
-      {/* SECTION 5 - JOIN THE EXPERIENCE */}
-      <section className="py-24 px-6 bg-[#faf9f7] relative overflow-hidden">
-        {/* Decorative background paper pattern */}
-        <div className="absolute inset-0 opacity-[0.02] pointer-events-none"
+      {/* SECTION 2 - THE FOUNDATIONS */}
+      <section className="py-24 px-6 relative bg-[#FAF6F0] overflow-hidden border-t border-foreground/5">
+        {/* Scrapbook paper noise overlay */}
+        <div className="absolute inset-0 opacity-[0.015] pointer-events-none"
           style={{ backgroundImage: "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%' height='100%' filter='url(%23noise)'/%3E%3C/svg%3E\")" }}
         />
 
-        <div className="max-w-4xl mx-auto text-center relative z-10">
+        <div className="max-w-5xl mx-auto relative z-10">
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-            className="space-y-8"
+            className="text-center mb-24 space-y-3"
           >
-            {/* Tag */}
-            <span className="inline-block bg-peach/50 px-4 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wider text-foreground/80 rotate-[-1deg]">
-              Registrations Are Now Open
+            <span className="font-handwritten text-lavender text-2xl tracking-wide inline-block transform -rotate-1">
+              three beautiful worlds.
             </span>
-
-            {/* Headline */}
-            <div className="space-y-2">
-              <h2 className="text-3xl md:text-5xl font-serif font-bold text-foreground">
-                The Girlfriend Hour —{" "}
-                <span className="font-handwritten text-lavender italic font-normal block md:inline text-4xl md:text-6xl">
-                  “UNFILTERED”
-                </span>
-              </h2>
-              <p className="text-sm md:text-base font-handwritten text-muted-foreground italic">
-                (No edits. No apologies. Just you.)
-              </p>
-            </div>
-
-            {/* Main description paragraph */}
-            <div className="max-w-2xl mx-auto space-y-6 text-foreground/80 leading-relaxed text-base md:text-lg font-medium">
-              <p>
-                A safe, expressive, and collaborative experience where young voices come together through theatre, poetry, music, storytelling, dance, comedy, conversation, and creative exploration.
-              </p>
-              <p>
-                Inspired by films, emotions, lived experiences, and personal truth — participants will interpret themes through their own lens and build something meaningful together.
-              </p>
-            </div>
-
-            {/* Bullet points section */}
-            <div className="bg-white/60 backdrop-blur-md p-8 rounded-[2rem] border border-white/50 max-w-xl mx-auto shadow-sm text-left">
-              <h4 className="font-serif font-bold text-lg mb-4 text-center">Whether you want to:</h4>
-              <ul className="grid grid-cols-2 gap-3 max-w-md mx-auto">
-                {["perform", "create", "collaborate", "organise", "support", "simply experience"].map((item) => (
-                  <li key={item} className="flex items-center justify-center sm:justify-start gap-2 bg-cream px-3.5 py-2 rounded-full text-xs sm:text-sm font-semibold border border-border/40 text-foreground/85">
-                    <Heart className="w-3 h-3 text-soft-pink fill-soft-pink flex-shrink-0" />
-                    <span>{item}</span>
-                  </li>
-                ))}
-              </ul>
-              <p className="text-center font-handwritten text-lg mt-6 text-[#E8612A] font-bold">
-                — there is space for you here.
-              </p>
-            </div>
-
-            {/* Invitation */}
-            <div className="space-y-1 font-serif text-lg md:text-2xl font-bold tracking-wider text-foreground/90 uppercase pt-4 leading-tight">
-              <p>Build your team.</p>
-              <p>Bring your voice.</p>
-              <p>Come as you are.</p>
-            </div>
-
-            {/* Google Form Embed Container */}
-            <div className="mt-16 bg-white/40 backdrop-blur-sm p-3 sm:p-5 md:p-6 rounded-[2.5rem] border border-white/60 shadow-soft max-w-3xl mx-auto overflow-hidden">
-              <div className="relative w-full overflow-hidden rounded-[2rem] bg-cream/30 min-h-[750px] sm:min-h-[850px] md:min-h-[900px] border border-border/20">
-                <iframe
-                  src="https://docs.google.com/forms/d/1ZSUlQS2k2gWhYY2oZmEOwRshBHK-Ml_tfNpdBm17cJk/viewform?embedded=true"
-                  width="100%"
-                  height="100%"
-                  frameBorder="0"
-                  marginHeight={0}
-                  marginWidth={0}
-                  className="absolute inset-0 w-full h-full rounded-[2rem]"
-                >
-                  Loading…
-                </iframe>
-              </div>
-            </div>
-
-            {/* Small Emotional Footer Text */}
-            <p className="font-handwritten text-lg sm:text-xl text-foreground/70 max-w-md mx-auto pt-6 leading-relaxed">
-              “Looking forward to creating something honest, expressive, and unforgettable together 💫”
-            </p>
+            <h2 className="text-3xl md:text-5xl font-serif font-bold text-foreground">
+              The Foundations of Unfiltered
+            </h2>
+            <div className="w-32 h-1 bg-soft-pink/40 mx-auto rounded-full mt-4" />
           </motion.div>
+
+          <div className="space-y-20 md:space-y-32">
+            
+            {/* FOUNDATION 1: THE GIRLFRIEND HOUR (TGH) */}
+            <div className="grid md:grid-cols-12 gap-8 md:gap-12 items-center">
+              <motion.div
+                initial={{ opacity: 0, x: -30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8 }}
+                className="md:col-span-7 space-y-6"
+              >
+                <div className="inline-flex items-center gap-2 bg-[#FFF4F0] border border-[#FFD9CE] px-4 py-1.5 rounded-full">
+                  <span className="text-xs font-bold tracking-wider text-[#E8612A] uppercase">01 / The Creative Catalyst</span>
+                </div>
+                <h3 className="text-3xl md:text-4xl font-serif font-bold text-foreground leading-tight">
+                  THE GIRLFRIEND HOUR (TGH)
+                </h3>
+                <p className="text-base md:text-lg text-foreground/80 leading-relaxed font-medium">
+                  At its core, **The Girlfriend Hour** is a creative incubator and micro-culture. We exist to build a vibrant, safe community where young women discover the absolute power of their voice. Through storytelling, collaborative arts, theatre, and deep, unedited expression, we craft experiences that are deeply personal yet universally understood.
+                </p>
+                <p className="text-sm font-handwritten text-muted-foreground/80 italic border-l-2 border-peach/50 pl-4 py-1">
+                  “We don&apos;t fit into molds here. We break them, color them, and share them with the world.”
+                </p>
+              </motion.div>
+              
+              <motion.div
+                initial={{ opacity: 0, scale: 0.95, rotate: -2 }}
+                whileInView={{ opacity: 1, scale: 1, rotate: -1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8 }}
+                className="md:col-span-5 flex justify-center relative"
+              >
+                <div className="bg-white p-3 pb-8 rounded-[4px] shadow-lg w-full max-w-sm border border-foreground/5 transform -rotate-1 hover:rotate-0 transition-transform">
+                  <div className="relative aspect-[4/3] bg-cream overflow-hidden">
+                    <Image
+                      src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=600&h=450&fit=crop"
+                      alt="The Girlfriend Hour"
+                      fill
+                      className="object-cover"
+                    />
+                  </div>
+                  <p className="font-handwritten text-sm text-center text-foreground/75 mt-3">the magic of safe spaces. 💫</p>
+                </div>
+                <div className="absolute -top-2 left-8 w-12 h-4 bg-pastel-yellow/60 transform -rotate-12" />
+              </motion.div>
+            </div>
+
+            {/* FOUNDATION 2: KSHRUJAN */}
+            <div className="grid md:grid-cols-12 gap-8 md:gap-12 items-center md:flex-row-reverse">
+              <motion.div
+                initial={{ opacity: 0, x: 30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8 }}
+                className="md:col-span-7 md:order-2 space-y-6"
+              >
+                <div className="inline-flex items-center gap-2 bg-[#F3F8F4] border border-[#D5EAD8] px-4 py-1.5 rounded-full">
+                  <span className="text-xs font-bold tracking-wider text-[#5B8266] uppercase">02 / The Youth Backbone</span>
+                </div>
+                <h3 className="text-3xl md:text-4xl font-serif font-bold text-[#344E41] leading-tight">
+                  KSHRUJAN
+                </h3>
+                <p className="text-base md:text-lg text-foreground/80 leading-relaxed font-medium">
+                  **Kshrujan** is a grass-roots, youth-led initiative that organizes, fosters, and empowers new learning ecosystems. Focused on bolstering self-confidence, soft skills, creative communication, and active leadership, Kshrujan creates spaces where students and young adults don&apos;t just learn—they participate, lead, and grow collectively.
+                </p>
+                <p className="text-sm font-handwritten text-muted-foreground/80 italic border-l-2 border-sage/50 pl-4 py-1">
+                  “Empowerment starts when we learn to speak our truths without hesitation.”
+                </p>
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, scale: 0.95, rotate: 2 }}
+                whileInView={{ opacity: 1, scale: 1, rotate: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8 }}
+                className="md:col-span-5 md:order-1 flex justify-center relative"
+              >
+                <div className="bg-white p-3 pb-8 rounded-[4px] shadow-lg w-full max-w-sm border border-foreground/5 transform rotate-1 hover:rotate-0 transition-transform">
+                  <div className="relative aspect-[4/3] bg-cream overflow-hidden">
+                    <Image
+                      src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=600&h=450&fit=crop"
+                      alt="Kshrujan Leadership"
+                      fill
+                      className="object-cover"
+                    />
+                  </div>
+                  <p className="font-handwritten text-sm text-center text-foreground/75 mt-3">collaboration and community. 🌱</p>
+                </div>
+                <div className="absolute -top-2 right-8 w-12 h-4 bg-baby-blue/60 transform rotate-12" />
+              </motion.div>
+            </div>
+
+            {/* FOUNDATION 3: UDAYAN CARE FELLOWSHIP PROGRAM (USF) */}
+            <div className="grid md:grid-cols-12 gap-8 md:gap-12 items-center">
+              <motion.div
+                initial={{ opacity: 0, x: -30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8 }}
+                className="md:col-span-7 space-y-6"
+              >
+                <div className="inline-flex items-center gap-2 bg-[#F2F4FC] border border-[#D3DBFA] px-4 py-1.5 rounded-full">
+                  <span className="text-xs font-bold tracking-wider text-[#3B66D4] uppercase">03 / The Support System</span>
+                </div>
+                <h3 className="text-3xl md:text-4xl font-serif font-bold text-[#1D3557] leading-tight">
+                  UDAYAN CARE FELLOWSHIP (USF)
+                </h3>
+                <p className="text-base md:text-lg text-foreground/80 leading-relaxed font-medium">
+                  The **Udayan Shalini Fellowship (USF)** program is a cornerstone of systemic support and social impact. Dedicated to fostering high-quality educational exposure and strong emotional support systems, USF walks alongside young women from disadvantaged backgrounds, building them into self-reliant, socially aware leaders of tomorrow.
+                </p>
+                <p className="text-sm font-handwritten text-muted-foreground/80 italic border-l-2 border-lavender/50 pl-4 py-1">
+                  “Education shapes minds, but fellowship shapes lives.”
+                </p>
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, scale: 0.95, rotate: -1 }}
+                whileInView={{ opacity: 1, scale: 1, rotate: -2 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8 }}
+                className="md:col-span-5 flex justify-center relative"
+              >
+                <div className="bg-white p-3 pb-8 rounded-[4px] shadow-lg w-full max-w-sm border border-foreground/5 transform -rotate-2 hover:rotate-0 transition-transform">
+                  <div className="relative aspect-[4/3] bg-cream overflow-hidden">
+                    <Image
+                      src="https://images.unsplash.com/photo-1517457373958-b7bdd4587205?w=600&h=450&fit=crop"
+                      alt="Udayan Care Fellowship"
+                      fill
+                      className="object-cover"
+                    />
+                  </div>
+                  <p className="font-handwritten text-sm text-center text-foreground/75 mt-3">fellowship that empowers. 💫</p>
+                </div>
+                <div className="absolute -top-2 left-6 w-12 h-4 bg-soft-pink/60 transform -rotate-6" />
+              </motion.div>
+            </div>
+
+          </div>
         </div>
       </section>
 
