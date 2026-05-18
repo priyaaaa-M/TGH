@@ -39,18 +39,6 @@ const roles = [
 export function FinalCTASection() {
   const { openRegisterModal } = useRegisterModal()
 
-  const handleRoleClick = (index: number) => {
-    if (index < 3) {
-      openRegisterModal()
-    } else {
-      // Scroll to footer newsletter
-      const footer = document.querySelector("footer")
-      if (footer) {
-        footer.scrollIntoView({ behavior: "smooth" })
-      }
-    }
-  }
-
   return (
     <section id="join" className="py-20 md:py-32 px-4 sm:px-6 lg:px-8 bg-cream/50">
       <div className="max-w-7xl mx-auto">
@@ -85,8 +73,8 @@ export function FinalCTASection() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
-                  onClick={() => handleRoleClick(index)}
-                  className="bg-white rounded-2xl p-5 shadow-soft w-full text-left cursor-pointer group hover:shadow-md transition-shadow"
+                  onClick={index === 0 ? openRegisterModal : undefined}
+                  className={`bg-white rounded-2xl p-5 shadow-soft w-full text-left ${index === 0 ? "cursor-pointer group hover:shadow-md transition-shadow" : ""}`}
                 >
                   <div
                     className={`w-12 h-12 ${role.iconBg} rounded-full flex items-center justify-center mb-4`}
@@ -99,9 +87,11 @@ export function FinalCTASection() {
                     {role.description}
                   </p>
 
-                  <div className="flex items-center gap-1 text-foreground/60 group-hover:text-foreground transition-colors">
-                    <ArrowRight className="w-4 h-4" />
-                  </div>
+                  {index === 0 && (
+                    <div className="flex items-center gap-1 text-foreground/60 group-hover:text-foreground transition-colors">
+                      <ArrowRight className="w-4 h-4" />
+                    </div>
+                  )}
                 </motion.div>
               ))}
             </div>
