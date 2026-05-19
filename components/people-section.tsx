@@ -32,7 +32,7 @@ const teamMembers = [
   },
   {
     name: "Sourabh Bagree",
-    role: "Creative Storyteller",
+    role: "Facilitator",
     quote: "“Kuch toh log kahenge, logon ka kaam hai kehna.”",
     image: "/profile_pic/Sourabh Bagree.png",
     bgColor: "bg-[#E8F5E8]",
