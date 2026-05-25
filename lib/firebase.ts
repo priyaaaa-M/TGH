@@ -12,15 +12,31 @@ const firebaseConfig = {
   measurementId: process.env.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID,
 };
 
-// Initialize Firebase
-const app = getApps().length > 0 ? getApp() : initializeApp(firebaseConfig);
+// Validate required config
+if (!firebaseConfig.apiKey || !firebaseConfig.projectId) {
+  console.error(
+    "Firebase config missing! Ensure NEXT_PUBLIC_FIREBASE_API_KEY and NEXT_PUBLIC_FIREBASE_PROJECT_ID are set in .env.local"
+  );
+}
+
+// Initialize Firebase (singleton)
+let app;
+try {
+  app = getApps().length > 0 ? getApp() : initializeApp(firebaseConfig);
+  console.log("Firebase app initialized successfully for project:", firebaseConfig.projectId);
+} catch (error) {
+  console.error("Firebase initialization failed:", error);
+  throw error;
+}
 
 export const db = getFirestore(app);
 export const auth = getAuth(app);
 
-// Initialize anonymous auth
+// Initialize anonymous auth (client-side only)
 if (typeof window !== "undefined") {
-  signInAnonymously(auth).catch((error) => {
-    console.error("Firebase anonymous auth error:", error);
-  });
+  signInAnonymously(auth)
+    .then(() => console.log("Firebase anonymous auth successful"))
+    .catch((error) => {
+      console.error("Firebase anonymous auth error:", error.code, error.message);
+    });
 }

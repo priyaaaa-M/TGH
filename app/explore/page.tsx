@@ -71,7 +71,7 @@ export default function ExplorePage() {
             <div className="bg-white p-4 pb-14 rounded-[4px] shadow-2xl w-full max-w-md border border-foreground/5 transform rotate-1">
               <div className="relative aspect-[4/5] bg-cream rounded-sm overflow-hidden border border-foreground/10">
                 <Image
-                  src="/profile_pic/hero_pg_new.png"
+                  src="/profile_pic/hero_pg_new.webp"
                   alt="The Girlfriend Hour Unfiltered Storytelling"
                   fill
                   className="object-cover"
@@ -131,7 +131,7 @@ export default function ExplorePage() {
           </motion.div>
 
           <div className="space-y-20 md:space-y-32">
-            
+
             {/* FOUNDATION 1: THE GIRLFRIEND HOUR (TGH) */}
             <div className="grid md:grid-cols-12 gap-8 md:gap-12 items-center">
               <motion.div
@@ -154,7 +154,7 @@ export default function ExplorePage() {
                   “We don&apos;t fit into molds here. We break them, color them, and share them with the world.”
                 </p>
               </motion.div>
-              
+
               <motion.div
                 initial={{ opacity: 0, scale: 0.95, rotate: -2 }}
                 whileInView={{ opacity: 1, scale: 1, rotate: -1 }}
@@ -165,7 +165,7 @@ export default function ExplorePage() {
                 <div className="bg-white p-3 pb-8 rounded-[4px] shadow-lg w-full max-w-sm border border-foreground/5 transform -rotate-1 hover:rotate-0 transition-transform">
                   <div className="relative aspect-[4/3] bg-cream overflow-hidden">
                     <Image
-                      src="/IMG_fol/img2.png"
+                      src="/IMG_fol/img_2.png"
                       alt="The Girlfriend Hour"
                       fill
                       className="object-cover"
@@ -210,7 +210,7 @@ export default function ExplorePage() {
                 <div className="bg-white p-3 pb-8 rounded-[4px] shadow-lg w-full max-w-sm border border-foreground/5 transform rotate-1 hover:rotate-0 transition-transform">
                   <div className="relative aspect-[4/3] bg-cream overflow-hidden">
                     <Image
-                      src="/profile_pic/kshrujan.png"
+                      src="/IMG_fol/kshrujan_logo.png"
                       alt="Kshrujan Logo"
                       fill
                       className="object-contain p-4"
@@ -255,7 +255,7 @@ export default function ExplorePage() {
                 <div className="bg-white p-3 pb-8 rounded-[4px] shadow-lg w-full max-w-sm border border-foreground/5 transform -rotate-2 hover:rotate-0 transition-transform">
                   <div className="relative aspect-[4/3] bg-cream overflow-hidden">
                     <Image
-                      src="/profile_pic/usf .png"
+                      src="/IMG_fol/usf_logo.png"
                       alt="Udayan Care Fellowship Logo"
                       fill
                       className="object-contain p-4"

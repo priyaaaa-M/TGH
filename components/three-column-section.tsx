@@ -38,6 +38,7 @@ export function ThreeColumnSection() {
   const [isRecording, setIsRecording] = useState(false)
   const [isUploading, setIsUploading] = useState(false)
   const [recordingTime, setRecordingTime] = useState(0)
+  const [errorMessage, setErrorMessage] = useState<string | null>(null)
   const [playingNoteId, setPlayingNoteId] = useState<string | null>(null)
   const audioRef = useRef<HTMLAudioElement | null>(null)
   const mediaRecorderRef = useRef<MediaRecorder | null>(null)
@@ -129,7 +130,8 @@ export function ThreeColumnSection() {
       setVotedOption(null)
       localStorage.removeItem("hasVotedPoll")
       localStorage.removeItem("votedOptionId")
-      alert("Voting failed. Please check your connection.")
+      setErrorMessage("Voting failed. Please check your connection.")
+      setTimeout(() => setErrorMessage(null), 5000)
     }
   }
 
@@ -145,7 +147,8 @@ export function ThreeColumnSection() {
     // Check if mediaDevices is supported
     if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
       console.error("MediaDevices not supported in this browser")
-      alert("Your browser does not support voice recording. Please try Chrome or Safari.")
+      setErrorMessage("Your browser does not support voice recording. Please try Chrome or Safari.")
+      setTimeout(() => setErrorMessage(null), 5000)
       return
     }
 
@@ -194,12 +197,13 @@ export function ThreeColumnSection() {
       console.error("Microphone Access Error:", err)
       setIsRecording(false)
       if (err.name === "NotAllowedError" || err.name === "PermissionDeniedError") {
-        alert("Please allow microphone access to record your voice. Check your browser settings.")
+        setErrorMessage("Please allow microphone access to record your voice.")
       } else if (err.name === "NotFoundError" || err.name === "DevicesNotFoundError") {
-        alert("No microphone found. Please connect a mic and try again.")
+        setErrorMessage("No microphone found. Please connect a mic and try again.")
       } else {
-        alert("Could not access microphone. Please ensure no other app is using it.")
+        setErrorMessage("Could not access microphone. Please ensure no other app is using it.")
       }
+      setTimeout(() => setErrorMessage(null), 5000)
     }
   }
 
@@ -295,7 +299,8 @@ export function ThreeColumnSection() {
       }
     } catch (err: any) {
       console.error("UPLOAD FAILED:", err)
-      alert(`Upload failed: ${err.message || "Unknown error"}`)
+      setErrorMessage(`Upload failed: ${err.message || "Unknown error"}`)
+      setTimeout(() => setErrorMessage(null), 5000)
     } finally {
       console.log("UPLOAD FINISHED: Cleaning up state.")
       setIsUploading(false)
@@ -311,6 +316,13 @@ export function ThreeColumnSection() {
   return (
     <section className="py-20 md:py-32 px-4 sm:px-6 lg:px-8 bg-lavender/20">
       <div className="max-w-7xl mx-auto">
+        {/* Inline error toast */}
+        {errorMessage && (
+          <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-2xl text-sm text-red-700 font-medium text-center animate-in fade-in slide-in-from-top-2">
+            {errorMessage}
+            <button onClick={() => setErrorMessage(null)} className="ml-3 text-red-400 hover:text-red-600 font-bold">✕</button>
+          </div>
+        )}
         <div className="grid md:grid-cols-3 gap-6 lg:gap-8">
           {/* Today's Prompt Card */}
           <motion.div

@@ -10,7 +10,7 @@ import { useRegisterModal } from "@/components/register-modal-provider"
 const polaroids = [
   {
     // friends sitting in circle, deep conversation
-    img: "/IMG_fol/img2.png",
+    img: "/IMG_fol/img_1.png",
     caption: "real conversations that matter. 🫂",
     tapeColor: "bg-pastel-yellow/80",
     tapeAngle: "-rotate-3",
@@ -20,7 +20,7 @@ const polaroids = [
   },
   {
     // open mic / poetry performance on stage
-    img: "/IMG_fol/img3.png",
+    img: "/IMG_fol/img_2.png",
     caption: "say it loudly. 🎤",
     tapeColor: "bg-soft-pink/80",
     tapeAngle: "rotate-2",
@@ -30,7 +30,7 @@ const polaroids = [
   },
   {
     // group playing guitar and singing together
-    img: "/IMG_fol/img4.png",
+    img: "/IMG_fol/img_3.png",
     caption: "music heals softly. 🎸",
     tapeColor: "bg-lavender/80",
     tapeAngle: "-rotate-1",
@@ -40,7 +40,7 @@ const polaroids = [
   },
   {
     // brainstorming / creative session on laptops
-    img: "/IMG_fol/img5.png",
+    img: "/IMG_fol/img_4.png",
     caption: "building things together. 💻",
     tapeColor: "bg-baby-blue/80",
     tapeAngle: "rotate-4",
@@ -50,7 +50,7 @@ const polaroids = [
   },
   {
     // people dancing freely at a workshop
-    img: "/IMG_fol/img6.png",
+    img: "/IMG_fol/img_5.png",
     caption: "move how you feel. 🕺",
     tapeColor: "bg-peach/80",
     tapeAngle: "-rotate-2",
@@ -60,7 +60,7 @@ const polaroids = [
   },
   {
     // people painting / journaling together
-    img: "/IMG_fol/img7.png",
+    img: "/IMG_fol/img_6.png",
     caption: "creating without fear. 🎨",
     tapeColor: "bg-[#b3d9d3]/80",
     tapeAngle: "rotate-1",
@@ -70,7 +70,7 @@ const polaroids = [
   },
   {
     // group hug / emotional support moment
-    img: "/IMG_fol/img8.png",
+    img: "/IMG_fol/img_7.png",
     caption: "safe. seen. supported. 🤍",
     tapeColor: "bg-soft-pink/80",
     tapeAngle: "-rotate-3",
@@ -80,7 +80,7 @@ const polaroids = [
   },
   {
     // unfiltered moment
-    img: "/IMG_fol/img9.png",
+    img: "/IMG_fol/img_8.png",
     caption: "unfiltered magic. ✨",
     tapeColor: "bg-lavender/80",
     tapeAngle: "rotate-3",
@@ -103,9 +103,12 @@ const doodleMap: Record<string, React.ReactNode> = {
 export function BehindTheScenesSection() {
   const { openRegisterModal } = useRegisterModal()
   const isMobile = useIsMobile()
-  const [windowWidth, setWindowWidth] = useState(typeof window !== "undefined" ? window.innerWidth : 1200)
+  const [mounted, setMounted] = useState(false)
+  const [windowWidth, setWindowWidth] = useState(1200)
 
   useEffect(() => {
+    setMounted(true)
+    setWindowWidth(window.innerWidth)
     const handleResize = () => setWindowWidth(window.innerWidth)
     window.addEventListener("resize", handleResize)
     return () => window.removeEventListener("resize", handleResize)
@@ -145,10 +148,10 @@ export function BehindTheScenesSection() {
   }, [totalSlides])
 
   useEffect(() => {
-    if (isPaused) return
-    const id = setInterval(next, 8000) // Slowed down significantly for better readability
+    if (isPaused || !mounted) return
+    const id = setInterval(next, 8000)
     return () => clearInterval(id)
-  }, [isPaused, next])
+  }, [isPaused, next, mounted])
 
   const handleDrag = (_: MouseEvent | TouchEvent | PointerEvent, info: PanInfo) => {
     if (info.offset.x < -60) next()
@@ -156,13 +159,32 @@ export function BehindTheScenesSection() {
   }
 
   const visibleCards = polaroids.slice(activeSlide * cardsVisible, activeSlide * cardsVisible + cardsVisible)
-  // peek card from next group
   const peekCard = polaroids[(activeSlide * cardsVisible + cardsVisible) % polaroids.length]
 
   const variants = {
     enter: (d: number) => ({ x: d > 0 ? 500 : -500, opacity: 0, scale: 0.95 }),
     center: { x: 0, opacity: 1, scale: 1 },
     exit: (d: number) => ({ x: d > 0 ? -500 : 500, opacity: 0, scale: 0.95 }),
+  }
+
+  if (!mounted) {
+    return (
+      <section id="bts" className="relative py-20 md:py-28 px-4 sm:px-6 lg:px-8 overflow-hidden">
+        <div className="max-w-7xl mx-auto">
+          <div className="flex items-center justify-center min-h-[400px]">
+            <div className="animate-pulse space-y-4 w-full max-w-2xl">
+              <div className="h-8 bg-foreground/5 rounded-full w-48 mx-auto" />
+              <div className="h-12 bg-foreground/5 rounded-xl w-64 mx-auto" />
+              <div className="grid grid-cols-4 gap-4 mt-8">
+                {[1, 2, 3, 4].map((i) => (
+                  <div key={i} className="aspect-[3/4] bg-foreground/5 rounded-xl" />
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    )
   }
 
   return (
