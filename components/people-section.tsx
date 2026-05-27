@@ -56,7 +56,7 @@ const teamMembers = [
     },
   {
     name: "Counsellors / Emotional Safety Leads",
-    role: "TBD",
+    role: "Coming Soon",
     quote: "“Help hold a non-judgmental, safe environment for participants who may feel vulnerable. Support facilitators in navigating sensitive situations.”",
     image: "",
     bgColor: "bg-[#FFF9E8]",
@@ -156,7 +156,7 @@ export function PeopleSection() {
                       alt={member.name}
                       className="w-full h-full object-cover grayscale-[20%] sepia-[10%] group-hover:grayscale-0 group-hover:sepia-0 group-hover:scale-105 transition-all duration-500"
                       onError={(e) => {
-                        (e.target as HTMLImageElement).src = 'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=400&h=500&fit=crop';
+                        (e.target as HTMLImageElement).src = '/IMG_fol/img_1.png';
                       }}
                     />
                   ) : (
@@ -195,7 +195,7 @@ export function PeopleSection() {
       <div className="relative mt-8 md:mt-16 w-full h-[60vh] min-h-[500px] flex items-center justify-center overflow-hidden">
         {/* Background image representing youth culture/glamour/stage lights */}
         <Image
-          src="https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=1600&h=900&fit=crop"
+          src="/IMG_fol/img_6.png"
           alt="Youth community event with warm stage lights"
           fill
           className="object-cover"

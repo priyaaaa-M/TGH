@@ -23,8 +23,9 @@ interface Confession {
   size: string
 }
 
-const DEFAULT_CONFESSIONS = [
+const DEFAULT_CONFESSIONS: Confession[] = [
   {
+    id: "default-1",
     text: "I act okay all the time.",
     likes: 124,
     bgColor: "#FFF9E8",
@@ -37,6 +38,7 @@ const DEFAULT_CONFESSIONS = [
     size: "w-[170px] md:w-[190px] min-h-[200px]",
   },
   {
+    id: "default-2",
     text: "I don't know who I really am.",
     likes: 98,
     bgColor: "#EDE0FF",
@@ -49,6 +51,7 @@ const DEFAULT_CONFESSIONS = [
     size: "w-[185px] md:w-[200px] min-h-[220px]",
   },
   {
+    id: "default-3",
     text: "I am tired of pretending.",
     likes: 156,
     bgColor: "#FFE3E8",
@@ -61,6 +64,7 @@ const DEFAULT_CONFESSIONS = [
     size: "w-[160px] md:w-[180px] min-h-[195px]",
   },
   {
+    id: "default-4",
     text: "I just want to be heard.",
     likes: 201,
     bgColor: "#FFF4C8",
@@ -73,6 +77,7 @@ const DEFAULT_CONFESSIONS = [
     size: "w-[175px] md:w-[195px] min-h-[210px]",
   },
   {
+    id: "default-5",
     text: "I smile in public, break in private.",
     likes: 87,
     bgColor: "#E8F5E8",
@@ -85,6 +90,7 @@ const DEFAULT_CONFESSIONS = [
     size: "w-[180px] md:w-[200px] min-h-[215px]",
   },
   {
+    id: "default-6",
     text: "Some days I feel too much for this world.",
     likes: 112,
     bgColor: "#FFE8D8",
@@ -97,6 +103,7 @@ const DEFAULT_CONFESSIONS = [
     size: "w-[190px] md:w-[210px] min-h-[205px]",
   },
   {
+    id: "default-7",
     text: "I question everything I feel.",
     likes: 77,
     bgColor: "#F0F4FF",
@@ -109,6 +116,7 @@ const DEFAULT_CONFESSIONS = [
     size: "w-[165px] md:w-[185px] min-h-[200px]",
   },
   {
+    id: "default-8",
     text: "I wish people saw the real me.",
     likes: 143,
     bgColor: "#FFF9E8",
@@ -121,6 +129,7 @@ const DEFAULT_CONFESSIONS = [
     size: "w-[175px] md:w-[195px] min-h-[195px]",
   },
 ]
+
 
 
 

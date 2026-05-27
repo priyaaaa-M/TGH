@@ -90,7 +90,7 @@ export function SafeSpaceSection() {
             className="bg-lavender/30 rounded-3xl p-8 text-center"
           >
             <p className="text-sm font-medium uppercase tracking-wide text-foreground/70 mb-4">
-              Starting
+              Next Experience Begins
             </p>
             <p className="text-3xl md:text-4xl font-serif font-bold mb-6">
               28th June 2026
@@ -132,7 +132,7 @@ export function SafeSpaceSection() {
               onClick={openRegisterModal}
               className="inline-flex items-center justify-center gap-2 bg-foreground text-primary-foreground px-6 py-3 rounded-full font-medium hover:bg-foreground/90 transition-all hover:scale-105 mx-auto border-2 border-foreground"
             >
-              Join the Space
+              Join the Experience
               <ArrowUpRight className="w-4 h-4" />
             </button>
 

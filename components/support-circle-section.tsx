@@ -17,21 +17,21 @@ export function SupportCircleSection() {
 
   const collage = [
     {
-      url: "/IMG_fol/img_4.png",
+      url: "/placeholder.jpg",
       alt: "Safe listening space discussion",
       rotation: -3,
       tapeColor: "rgba(230,170,220,0.7)",
       tapeAngle: -4,
     },
     {
-      url: "/IMG_fol/img_8.png",
+      url: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=400&h=500&fit=crop",
       alt: "Warm peer support community",
       rotation: 2,
       tapeColor: "rgba(250,220,60,0.7)",
       tapeAngle: 3,
     },
     {
-      url: "/IMG_fol/img_1.png",
+      url: "",
       alt: "Empathy and care support session",
       rotation: -1,
       tapeColor: "rgba(130,200,180,0.7)",
@@ -48,7 +48,7 @@ export function SupportCircleSection() {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="grid lg:grid-cols-12 gap-12 lg:gap-16 items-center">
-          
+
           {/* Left Column: Zine-Style Content & Text */}
           <div className="lg:col-span-6 space-y-8">
             <motion.div
@@ -85,7 +85,7 @@ export function SupportCircleSection() {
             </motion.div>
 
             {/* Floating Scrapbook Tags */}
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}

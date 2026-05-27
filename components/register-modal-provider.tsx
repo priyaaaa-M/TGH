@@ -1,6 +1,6 @@
 "use client"
 
-import React, { createContext, useContext, useState, useRef } from "react"
+import React, { createContext, useContext, useState, useRef, useEffect } from "react"
 import { AnimatePresence, motion } from "framer-motion"
 import { Sparkles, X, Heart, Loader2, ArrowRight, ShieldCheck, HeartHandshake, ArrowLeft } from "lucide-react"
 import { db } from "@/lib/firebase"
@@ -84,7 +84,7 @@ export function RegisterModalProvider({ children }: { children: React.ReactNode 
     if (phone.trim()) {
       const cleanPhone = phone.replace(/[^0-9+]/g, '')
       if (cleanPhone.length < 7 || cleanPhone.length > 15) {
-        setStep1Error("Please enter a valid phone number length (between 7 and 15 digits).")
+        setStep1Error("Please enter a valid phone number (7–15 digits).")
         return
       }
     }
@@ -269,7 +269,7 @@ export function RegisterModalProvider({ children }: { children: React.ReactNode 
                       onClick={() => setStep(1)}
                       className="w-full sm:w-auto bg-foreground text-primary-foreground hover:bg-foreground/90 font-bold px-8 py-4 rounded-full text-sm sm:text-base transition-all hover:scale-105 hover:shadow-soft-lg flex items-center justify-center gap-2 border-2 border-foreground"
                     >
-                      Fill Registration Form <span className="text-lg">→</span>
+                      Join the Experience <span className="text-lg">→</span>
                     </button>
                     <button
                       onClick={closeRegisterModal}
@@ -574,76 +574,157 @@ export function RegisterModalProvider({ children }: { children: React.ReactNode 
                 </div>
               )}
 
-              {/* Step 3: Success Admit-One Ticket State */}
+              {/* Step 3: Beautiful Emotional Success State */}
               {step === 3 && successData && (
                 <motion.div
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  className="relative mt-2 text-center space-y-6"
+                  initial={{ opacity: 0, scale: 0.92, y: 20 }}
+                  animate={{ opacity: 1, scale: 1, y: 0 }}
+                  transition={{ type: "spring", duration: 0.6, bounce: 0.15 }}
+                  className="relative mt-2 text-center space-y-6 overflow-hidden"
                 >
-                  <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto border-2 border-foreground shadow-md animate-bounce-soft">
-                    <Heart className="w-8 h-8 text-green-600 fill-green-600 animate-pulse" />
+                  {/* Confetti particles */}
+                  <div className="absolute inset-0 pointer-events-none overflow-hidden" aria-hidden>
+                    {[
+                      { color: "#E3D6FF", top: "10%", left: "15%", delay: 0, size: 8 },
+                      { color: "#FFD86B", top: "5%", left: "50%", delay: 0.1, size: 6 },
+                      { color: "#FFC1CC", top: "15%", left: "80%", delay: 0.2, size: 10 },
+                      { color: "#B7D3B0", top: "30%", left: "5%", delay: 0.15, size: 7 },
+                      { color: "#FFB38A", top: "25%", left: "90%", delay: 0.3, size: 6 },
+                      { color: "#A8D5FF", top: "50%", left: "10%", delay: 0.05, size: 9 },
+                      { color: "#E3D6FF", top: "60%", left: "85%", delay: 0.25, size: 7 },
+                      { color: "#FFD86B", top: "70%", left: "20%", delay: 0.4, size: 5 },
+                      { color: "#FFC1CC", top: "80%", left: "70%", delay: 0.35, size: 8 },
+                      { color: "#B7D3B0", top: "90%", left: "40%", delay: 0.45, size: 6 },
+                    ].map((p, i) => (
+                      <motion.div
+                        key={i}
+                        initial={{ opacity: 0, y: -20, rotate: 0 }}
+                        animate={{ opacity: [0, 1, 0.8, 0], y: [0, 80, 160], rotate: [0, 180, 360] }}
+                        transition={{ delay: p.delay, duration: 2.5, ease: "easeIn", repeat: 0 }}
+                        style={{
+                          position: "absolute",
+                          top: p.top,
+                          left: p.left,
+                          width: p.size,
+                          height: p.size,
+                          background: p.color,
+                          borderRadius: i % 2 === 0 ? "50%" : "2px",
+                        }}
+                      />
+                    ))}
                   </div>
 
-                  <div className="space-y-2">
-                    <h3 className="text-3xl font-serif font-black text-foreground">
-                      You are in! 🌸
+                  {/* Glowing heart */}
+                  <motion.div
+                    initial={{ scale: 0 }}
+                    animate={{ scale: [0, 1.3, 1] }}
+                    transition={{ duration: 0.6, ease: "easeOut" }}
+                    className="relative mx-auto w-20 h-20"
+                  >
+                    <div className="absolute inset-0 bg-soft-pink/30 rounded-full blur-xl animate-pulse-soft" />
+                    <div className="relative w-20 h-20 bg-gradient-to-br from-soft-pink/60 to-lavender/60 rounded-full flex items-center justify-center border-2 border-white shadow-lg">
+                      <span className="text-3xl">🌸</span>
+                    </div>
+                  </motion.div>
+
+                  {/* Headline */}
+                  <motion.div
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.3 }}
+                    className="space-y-2"
+                  >
+                    <h3 className="text-2xl sm:text-3xl font-serif font-black text-foreground">
+                      You&apos;re officially part of the space 💫
                     </h3>
-                    <p className="font-handwritten text-xl text-orange-highlight font-bold">
-                      Your space is held with gentle care.
+                    <p className="font-handwritten text-xl text-lavender font-bold italic">
+                      Welcome to The Girlfriend Hour.
                     </p>
-                  </div>
+                  </motion.div>
 
-                  {/* Physical Scrapbook Ticket Mockup */}
-                  <div className="relative bg-[#FFFDF9] border-4 border-foreground p-6 sm:p-8 rounded-[1.5rem] shadow-soft-lg rotate-[1.5deg] max-w-md mx-auto overflow-hidden">
-                    {/* Retro Ticket punch cuts */}
+                  {/* Warm message */}
+                  <motion.div
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.45 }}
+                    className="bg-lavender/20 rounded-2xl px-5 py-4 max-w-sm mx-auto text-left border border-lavender/30"
+                  >
+                    <p className="text-sm text-foreground/80 leading-relaxed font-medium">
+                      Thank you for joining <span className="font-bold">The Girlfriend Hour — UNFILTERED.</span>
+                    </p>
+                    <p className="text-sm text-foreground/70 leading-relaxed mt-2">
+                      A space built for expression, honesty, creativity, and community. We can&apos;t wait to create something meaningful together.
+                    </p>
+                    <Heart className="mt-3 w-4 h-4 text-soft-pink fill-soft-pink" />
+                  </motion.div>
+
+                  {/* Scrapbook Ticket */}
+                  <motion.div
+                    initial={{ opacity: 0, rotate: 0 }}
+                    animate={{ opacity: 1, rotate: 1.5 }}
+                    transition={{ delay: 0.55 }}
+                    className="relative bg-[#FFFDF9] border-4 border-foreground p-5 sm:p-7 rounded-[1.5rem] shadow-soft-lg max-w-md mx-auto overflow-hidden"
+                  >
+                    {/* Ticket punch cuts */}
                     <div className="absolute top-1/2 -left-4 -translate-y-1/2 w-8 h-8 bg-[#F8F4EE] rounded-full border-r-4 border-foreground" />
                     <div className="absolute top-1/2 -right-4 -translate-y-1/2 w-8 h-8 bg-[#F8F4EE] rounded-full border-l-4 border-foreground" />
-                    
-                    {/* Dashed separator */}
                     <div className="absolute top-1/2 left-4 right-4 -translate-y-1/2 border-t-2 border-dashed border-foreground/30 pointer-events-none" />
 
-                    {/* Ticket Contents: Top Half */}
-                    <div className="pb-8 space-y-2">
+                    <div className="pb-7 space-y-1">
                       <span className="font-handwritten text-xs uppercase tracking-widest text-muted-foreground">Admit One</span>
-                      <h4 className="font-serif font-black text-xl tracking-tight text-foreground">
-                        THE GIRLFRIEND HOUR
-                      </h4>
-                      <p className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground">
-                        UNFILTERED • 2026 EDITION
-                      </p>
+                      <h4 className="font-serif font-black text-xl tracking-tight text-foreground">THE GIRLFRIEND HOUR</h4>
+                      <p className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground">UNFILTERED • 2026 EDITION</p>
                     </div>
 
-                    {/* Ticket Contents: Bottom Half */}
-                    <div className="pt-8 space-y-3">
-                      <div className="space-y-1">
+                    <div className="pt-7 space-y-3">
+                      <div className="space-y-0.5">
                         <span className="text-[11px] uppercase tracking-widest text-muted-foreground block font-serif">PARTICIPANT</span>
                         <span className="text-lg font-serif font-black text-foreground uppercase leading-none block">
                           {successData.name}
                         </span>
                       </div>
-
-                      <div className="space-y-1 pt-1 bg-lavender/30 py-2 rounded-xl border border-foreground/5 shadow-inner">
-                        <span className="text-[9px] uppercase tracking-widest text-muted-foreground block font-bold">TICKET REGISTRATION ID</span>
+                      <div className="bg-lavender/30 py-2 px-3 rounded-xl border border-foreground/5">
+                        <span className="text-[9px] uppercase tracking-widest text-muted-foreground block font-bold">TICKET ID</span>
                         <span className="text-sm font-mono font-black text-foreground tracking-wider select-all block">
                           {successData.regId}
                         </span>
                       </div>
                     </div>
-                  </div>
+                  </motion.div>
 
-                  <p className="text-sm text-muted-foreground leading-relaxed max-w-sm mx-auto font-sans">
-                    A copy of your registration ticket ID has been saved. We are extremely excited to share this safe, unfiltered space with you.
-                  </p>
+                  {/* Instagram follow */}
+                  <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: 0.7 }}
+                    className="bg-gradient-to-r from-soft-pink/20 to-lavender/20 rounded-2xl px-5 py-4 max-w-sm mx-auto border border-soft-pink/20"
+                  >
+                    <p className="text-xs text-foreground/70 font-medium text-center">
+                      Follow us on Instagram for updates, behind-the-scenes, and community moments 💛
+                    </p>
+                    <a
+                      href="https://www.instagram.com/kshrujanlife?igsh=MTUwanp0ZzB1Z3J1Mw=="
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="block text-center text-sm font-bold text-foreground mt-2 hover:underline"
+                    >
+                      @kshrujanlife →
+                    </a>
+                  </motion.div>
 
-                  <div className="pt-4 border-t border-dashed border-foreground/10">
+                  <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: 0.8 }}
+                    className="pt-2 border-t border-dashed border-foreground/10"
+                  >
                     <button
                       onClick={closeRegisterModal}
-                      className="w-full sm:w-auto bg-foreground text-primary-foreground hover:bg-foreground/90 font-bold px-8 py-3.5 rounded-full transition-all hover:scale-105 border-2 border-foreground shadow-[2px_2px_0px_rgba(0,0,0,1)]"
+                      className="w-full sm:w-auto bg-foreground text-primary-foreground hover:bg-foreground/90 font-bold px-8 py-3.5 rounded-full transition-all hover:scale-105 border-2 border-foreground"
                     >
-                      Close & Explore the Space
+                      Close &amp; Explore the Space ✨
                     </button>
-                  </div>
+                  </motion.div>
                 </motion.div>
               )}
             </motion.div>

@@ -3,16 +3,15 @@
 import { useState, useEffect } from "react"
 import Link from "next/link"
 import { motion, AnimatePresence } from "framer-motion"
-import { Menu, X, Sparkles } from "lucide-react"
+import { Menu, X } from "lucide-react"
 import { useRegisterModal } from "@/components/register-modal-provider"
 
 const navItems = [
   { name: "Home", href: "/" },
   { name: "Explore", href: "/explore" },
-  { name: "Experience", href: "/#experience" },
-  { name: "Voices", href: "/#voices" },
-  { name: "Team", href: "/#team" },
-  { name: "FAQ", href: "/#faq" },
+  { name: "Voices", href: "/voices" },
+  { name: "Groups", href: "/groups" },
+  { name: "FAQ", href: "/faq" },
 ]
 
 export function Navbar() {
@@ -51,8 +50,8 @@ export function Navbar() {
             </span>
           </Link>
 
-          {/* Desktop Menu */}
-          <div className="hidden md:flex items-center gap-8">
+          {/* Desktop Nav */}
+          <div className="hidden md:flex items-center gap-7">
             {navItems.map((item) => (
               <Link
                 key={item.name}
@@ -65,14 +64,13 @@ export function Navbar() {
             ))}
           </div>
 
-          {/* CTA Button */}
-          <div className="hidden md:flex items-center gap-3">
-            <Sparkles className="w-4 h-4 text-pastel-yellow" />
+          {/* Desktop Join CTA — single clean button */}
+          <div className="hidden md:flex items-center">
             <button
               onClick={openRegisterModal}
-              className="bg-foreground text-primary-foreground px-5 py-2.5 rounded-full text-sm font-medium hover:bg-foreground/90 transition-colors hover:scale-105"
+              className="bg-foreground text-primary-foreground px-5 py-2.5 rounded-full text-sm font-medium hover:bg-foreground/90 transition-all hover:scale-105"
             >
-              Join the Space
+              Join the Experience
             </button>
           </div>
 
@@ -80,6 +78,7 @@ export function Navbar() {
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             className="md:hidden p-2.5 -mr-2 rounded-full bg-white/40 backdrop-blur-md border border-foreground/5 hover:bg-lavender/30 transition-colors shadow-sm"
+            aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
           >
             {isMobileMenuOpen ? (
               <X className="w-5 h-5" />
@@ -97,7 +96,7 @@ export function Navbar() {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden bg-[#F8F4EE]/85 backdrop-blur-xl border-t border-border/50 absolute w-full shadow-soft"
+            className="md:hidden bg-[#F8F4EE]/95 backdrop-blur-xl border-t border-border/50 absolute w-full shadow-soft"
           >
             <div className="px-6 py-8 space-y-5">
               {navItems.map((item, index) => (
@@ -123,11 +122,14 @@ export function Navbar() {
                 className="pt-6"
               >
                 <button
-                    onClick={() => { openRegisterModal(); setIsMobileMenuOpen(false) }}
-                    className="block w-full text-center bg-foreground text-primary-foreground px-6 py-4 rounded-full text-base font-medium shadow-soft"
-                  >
-                    Join the Space
-                  </button>
+                  onClick={() => {
+                    openRegisterModal()
+                    setIsMobileMenuOpen(false)
+                  }}
+                  className="block w-full text-center bg-foreground text-primary-foreground px-6 py-4 rounded-full text-base font-medium shadow-soft"
+                >
+                  Join the Experience
+                </button>
               </motion.div>
             </div>
           </motion.div>
