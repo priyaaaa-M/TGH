@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion"
 import { Heart, Mic, BookOpen, Music, Users, MessageSquare, Lightbulb } from "lucide-react"
+import { RegistrationButton } from "@/components/registration-button"
 import { useRegisterModal } from "@/components/register-modal-provider"
 
 const activities = [
@@ -52,7 +53,7 @@ const steps = [
 
 export function HowItWorksSection() {
   const { openRegisterModal } = useRegisterModal()
-
+  
   return (
     <section id="how-it-works" className="relative py-16 md:py-28 px-4 sm:px-6 lg:px-8 overflow-hidden">
       {/* Subtle background texture */}

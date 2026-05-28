@@ -4,7 +4,7 @@ import { useState, useEffect, useRef } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { Mic, Play, ArrowUpRight, Send, X, Square, Loader2 } from "lucide-react"
 import { db, auth } from "@/lib/firebase"
-import { useRegisterModal } from "@/components/register-modal-provider"
+
 import { collection, query, orderBy, onSnapshot, addDoc, serverTimestamp, limit, doc, updateDoc, increment, getDoc, setDoc } from "firebase/firestore"
 import { Navbar } from "@/components/navbar"
 import { Footer } from "@/components/footer"
@@ -31,8 +31,7 @@ const pollOptions = [
 ]
 
 export default function VoicesPage() {
-  const { openRegisterModal } = useRegisterModal()
-  const [votedOption, setVotedOption] = useState<string | null>(null)
+    const [votedOption, setVotedOption] = useState<string | null>(null)
   const [pollData, setPollData] = useState<any>(null)
   const [isPollLoading, setIsPollLoading] = useState(true)
   const [voiceNotes, setVoiceNotes] = useState<VoiceNote[]>([])
@@ -368,7 +367,7 @@ export default function VoicesPage() {
 
             <div className="space-y-3">
               <button 
-                onClick={openRegisterModal}
+                onClick={() => window.open("https://forms.gle/VqQ3Tdji3F4nCWny5", "_blank", "noopener,noreferrer")}
                 className="w-full flex items-center justify-center gap-2 bg-foreground text-primary-foreground px-5 py-3 rounded-full font-medium hover:bg-foreground/90 transition-all border-2 border-foreground"
               >
                 Submit Anonymously
@@ -502,7 +501,7 @@ export default function VoicesPage() {
             </div>
 
             <button 
-              onClick={openRegisterModal}
+              onClick={() => window.open("https://forms.gle/VqQ3Tdji3F4nCWny5", "_blank", "noopener,noreferrer")}
               className="mt-4 text-sm text-orange-highlight font-bold hover:underline flex items-center gap-1"
             >
               Hear more voices

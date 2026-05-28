@@ -2,11 +2,12 @@
 
 import { motion } from "framer-motion"
 import { Heart, ArrowUpRight } from "lucide-react"
+import { RegistrationButton } from "@/components/registration-button"
 import { useRegisterModal } from "@/components/register-modal-provider"
 
 export function SupportCircleSection() {
   const { openRegisterModal } = useRegisterModal()
-
+  
   const tags = [
     { text: "empathy", color: "bg-[#EDE0FF] text-[#6366F1]" },
     { text: "listening", color: "bg-[#FFE8D8] text-[#E8612A]" },

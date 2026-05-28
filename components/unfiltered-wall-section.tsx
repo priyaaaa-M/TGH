@@ -7,7 +7,7 @@ import Link from "next/link"
 import { db, auth } from "@/lib/firebase"
 import { collection, query, orderBy, onSnapshot, addDoc, serverTimestamp, limit, updateDoc, doc, increment } from "firebase/firestore"
 
-const FORM_URL = "https://docs.google.com/forms/d/1ZSUlQS2k2gWhYY2oZmEOwRshBHK-Ml_tfNpdBm17cJk/edit?utm"
+const FORM_URL = "https://forms.gle/VqQ3Tdji3F4nCWny5"
 
 interface Confession {
   id: string

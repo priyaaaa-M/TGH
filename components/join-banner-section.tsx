@@ -2,11 +2,12 @@
 
 import { motion } from "framer-motion"
 import { ArrowUpRight } from "lucide-react"
+import { RegistrationButton } from "@/components/registration-button"
 import { useRegisterModal } from "@/components/register-modal-provider"
 
 export function JoinBannerSection() {
   const { openRegisterModal } = useRegisterModal()
-
+  
   return (
     <section className="py-6 px-4 sm:px-6 lg:px-8 bg-lavender">
       <div className="max-w-7xl mx-auto">

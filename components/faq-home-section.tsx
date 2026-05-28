@@ -3,6 +3,7 @@
 import { useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { Plus, Minus, Heart, Sparkles } from "lucide-react"
+import { RegistrationButton } from "@/components/registration-button"
 import { useRegisterModal } from "@/components/register-modal-provider"
 
 const faqs = [
@@ -63,9 +64,9 @@ const faqs = [
 ]
 
 export function FAQHomeSection() {
-  const [openIndex, setOpenIndex] = useState<number | null>(null)
   const { openRegisterModal } = useRegisterModal()
-
+  const [openIndex, setOpenIndex] = useState<number | null>(null)
+  
   return (
     <section id="faq" className="relative py-16 md:py-28 px-4 sm:px-6 lg:px-8">
       {/* Soft background */}

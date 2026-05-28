@@ -6,7 +6,7 @@ import { Heart, ArrowRight, Instagram, Youtube, Sparkles, Loader2, CheckCircle2,
 import { useState } from "react"
 import { db } from "@/lib/firebase"
 import { collection, addDoc, serverTimestamp, query, where, getDocs } from "firebase/firestore"
-import { useRegisterModal } from "@/components/register-modal-provider"
+
 
 const navLinks = [
   { name: "Home", href: "/" },
@@ -34,8 +34,7 @@ export function Footer() {
   const [status, setStatus] = useState<
     "idle" | "loading" | "success" | "already" | "invalid" | "error"
   >("idle")
-  const { openRegisterModal } = useRegisterModal()
-
+  
   const handleSubscribe = async (e?: React.FormEvent) => {
     e?.preventDefault()
 
@@ -156,12 +155,7 @@ export function Footer() {
                 </a>
               </li>
               <li>
-                <button
-                  onClick={openRegisterModal}
-                  className="text-sm text-muted-foreground hover:text-foreground transition-colors flex items-center gap-1.5"
-                >
-                  <Sparkles className="w-3.5 h-3.5" /> Register Now
-                </button>
+                <a href="https://forms.gle/VqQ3Tdji3F4nCWny5" target="_blank" rel="noopener noreferrer" className="text-sm text-muted-foreground hover:text-foreground transition-colors flex items-center gap-1.5"><Sparkles className="w-3.5 h-3.5" /> Register Now</a>
               </li>
             </ul>
           </motion.div>

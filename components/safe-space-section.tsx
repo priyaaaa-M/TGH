@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react"
 import { motion } from "framer-motion"
 import { Check, ArrowUpRight, Heart } from "lucide-react"
+import { RegistrationButton } from "@/components/registration-button"
 import { useRegisterModal } from "@/components/register-modal-provider"
 
 const safeSpaceItems = [
@@ -14,7 +15,7 @@ const safeSpaceItems = [
 
 export function SafeSpaceSection() {
   const { openRegisterModal } = useRegisterModal()
-  const [timeLeft, setTimeLeft] = useState({
+    const [timeLeft, setTimeLeft] = useState({
     days: 0,
     hours: 0,
     minutes: 0,

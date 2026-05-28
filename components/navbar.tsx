@@ -4,7 +4,7 @@ import { useState, useEffect } from "react"
 import Link from "next/link"
 import { motion, AnimatePresence } from "framer-motion"
 import { Menu, X } from "lucide-react"
-import { useRegisterModal } from "@/components/register-modal-provider"
+import { RegistrationButton } from "@/components/registration-button"
 
 const navItems = [
   { name: "Home", href: "/" },
@@ -17,8 +17,7 @@ const navItems = [
 export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
-  const { openRegisterModal } = useRegisterModal()
-
+  
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20)
@@ -66,12 +65,7 @@ export function Navbar() {
 
           {/* Desktop Join CTA — single clean button */}
           <div className="hidden md:flex items-center">
-            <button
-              onClick={openRegisterModal}
-              className="bg-foreground text-primary-foreground px-5 py-2.5 rounded-full text-sm font-medium hover:bg-foreground/90 transition-all hover:scale-105"
-            >
-              Join the Experience
-            </button>
+            <RegistrationButton className="" text="Join The Space" />
           </div>
 
           {/* Mobile Menu Button */}
@@ -121,15 +115,7 @@ export function Navbar() {
                 transition={{ delay: 0.3 }}
                 className="pt-6"
               >
-                <button
-                  onClick={() => {
-                    openRegisterModal()
-                    setIsMobileMenuOpen(false)
-                  }}
-                  className="block w-full text-center bg-foreground text-primary-foreground px-6 py-4 rounded-full text-base font-medium shadow-soft"
-                >
-                  Join the Experience
-                </button>
+                <RegistrationButton className="w-full" text="Join The Space" />
               </motion.div>
             </div>
           </motion.div>

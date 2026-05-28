@@ -5,6 +5,7 @@ import { motion, AnimatePresence, PanInfo } from "framer-motion"
 import { Play, Heart, Star, Sparkles } from "lucide-react"
 import Image from "next/image"
 import { useIsMobile } from "@/hooks/use-mobile"
+import { RegistrationButton } from "@/components/registration-button"
 import { useRegisterModal } from "@/components/register-modal-provider"
 
 const polaroids = [
@@ -102,7 +103,7 @@ const doodleMap: Record<string, React.ReactNode> = {
 
 export function BehindTheScenesSection() {
   const { openRegisterModal } = useRegisterModal()
-  const isMobile = useIsMobile()
+    const isMobile = useIsMobile()
   const [mounted, setMounted] = useState(false)
   const [windowWidth, setWindowWidth] = useState(1200)
 

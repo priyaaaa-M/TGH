@@ -3,7 +3,7 @@
 import { motion } from "framer-motion"
 import { ArrowRight, Users, Eye, Heart, Mail, Sparkles } from "lucide-react"
 import Link from "next/link"
-import { useRegisterModal } from "@/components/register-modal-provider"
+
 
 const roles = [
   {
@@ -37,8 +37,7 @@ const roles = [
 ]
 
 export function FinalCTASection() {
-  const { openRegisterModal } = useRegisterModal()
-
+  
   return (
     <section id="join" className="py-20 md:py-32 px-4 sm:px-6 lg:px-8 bg-cream/50">
       <div className="max-w-7xl mx-auto">
@@ -73,7 +72,7 @@ export function FinalCTASection() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
-                  onClick={index === 0 ? openRegisterModal : undefined}
+                  onClick={index === 0 ? () => window.open("https://forms.gle/VqQ3Tdji3F4nCWny5", "_blank", "noopener,noreferrer") : undefined}
                   className={`bg-white rounded-2xl p-5 shadow-soft w-full text-left ${index === 0 ? "cursor-pointer group hover:shadow-md transition-shadow" : ""}`}
                 >
                   <div
