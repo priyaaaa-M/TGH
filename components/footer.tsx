@@ -178,6 +178,11 @@ export function Footer() {
                 </Link>
               </li>
               <li>
+                <span className="text-sm text-muted-foreground hover:text-foreground transition-colors cursor-default">
+                  Privacy & Consent
+                </span>
+              </li>
+              <li>
                 <p className="text-xs text-muted-foreground leading-relaxed max-w-[160px]">
                   Your data is held with care and never shared without your consent.
                 </p>

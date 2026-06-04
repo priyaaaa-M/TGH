@@ -69,7 +69,7 @@ const testimonials = [
 
 export function TestimonialsSection() {
   return (
-    <section className="relative py-16 md:py-28 px-4 sm:px-6 lg:px-8 bg-white/30 overflow-hidden">
+    <section className="relative py-12 md:py-20 px-4 sm:px-6 lg:px-8 bg-white/30 overflow-hidden">
       {/* Decorative doodles */}
       <motion.div
         animate={{ y: [0, -6, 0], rotate: [0, 8, 0] }}

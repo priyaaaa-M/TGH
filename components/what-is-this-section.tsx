@@ -41,7 +41,7 @@ const stickyNotes = [
 
 export function WhatIsThisSection() {
   return (
-    <section id="about" className="py-20 md:py-32 px-4 sm:px-6 lg:px-8">
+    <section id="about" className="py-14 md:py-24 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
         {/* Section Label */}
         <motion.div

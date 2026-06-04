@@ -45,7 +45,7 @@ export function SafeSpaceSection() {
   }, [])
 
   return (
-    <section className="py-20 md:py-32 px-4 sm:px-6 lg:px-8 bg-white/50">
+    <section className="py-14 md:py-24 px-4 sm:px-6 lg:px-8 bg-white/50">
       <div className="max-w-7xl mx-auto">
         <div className="grid md:grid-cols-3 gap-6 lg:gap-8">
           {/* Safe Space Card */}

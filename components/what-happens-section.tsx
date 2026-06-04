@@ -23,7 +23,7 @@ const feelings = [
 
 export function WhatHappensSection() {
   return (
-    <section id="what-happens" className="relative py-16 md:py-28 px-4 sm:px-6 lg:px-8 overflow-hidden">
+    <section id="what-happens" className="relative py-12 md:py-20 px-4 sm:px-6 lg:px-8 overflow-hidden">
       {/* Soft bg blob */}
       <div className="absolute top-0 right-0 w-96 h-96 bg-lavender/10 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute bottom-0 left-0 w-80 h-80 bg-soft-pink/10 rounded-full blur-3xl pointer-events-none" />

@@ -120,6 +120,16 @@ export function HeroSection() {
             music, poetry, expression, and community.
           </motion.p>
 
+          {/* Supporting description */}
+          <motion.p
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.25, ease: "easeOut" }}
+            className="text-sm sm:text-base text-muted-foreground/80 max-w-lg mx-auto lg:mx-0 mb-6 md:mb-8 leading-relaxed"
+          >
+            The Girlfriend Hour is a facilitated community experience where women and girls connect, reflect, express themselves, and grow through storytelling, creativity, and meaningful conversations.
+          </motion.p>
+
           {/* Buttons */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}

@@ -5,6 +5,7 @@ import Link from "next/link"
 import { motion, AnimatePresence } from "framer-motion"
 import { Menu, X } from "lucide-react"
 import { RegistrationButton } from "@/components/registration-button"
+import { useRegisterModal } from "@/components/register-modal-provider"
 
 const navItems = [
   { name: "Home", href: "/" },
@@ -15,6 +16,7 @@ const navItems = [
 ]
 
 export function Navbar() {
+  const { openRegisterModal } = useRegisterModal()
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   
@@ -65,7 +67,7 @@ export function Navbar() {
 
           {/* Desktop Join CTA — single clean button */}
           <div className="hidden md:flex items-center">
-            <RegistrationButton className="" text="Join The Space" />
+            <RegistrationButton className="" text="Join The Space" onClick={openRegisterModal} />
           </div>
 
           {/* Mobile Menu Button */}
@@ -115,7 +117,7 @@ export function Navbar() {
                 transition={{ delay: 0.3 }}
                 className="pt-6"
               >
-                <RegistrationButton className="w-full" text="Join The Space" />
+                <RegistrationButton className="w-full" text="Join The Space" onClick={openRegisterModal} />
               </motion.div>
             </div>
           </motion.div>

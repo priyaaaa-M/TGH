@@ -55,7 +55,7 @@ export function HowItWorksSection() {
   const { openRegisterModal } = useRegisterModal()
   
   return (
-    <section id="how-it-works" className="relative py-16 md:py-28 px-4 sm:px-6 lg:px-8 overflow-hidden">
+    <section id="how-it-works" className="relative py-12 md:py-20 px-4 sm:px-6 lg:px-8 overflow-hidden">
       {/* Subtle background texture */}
       <div className="absolute inset-0 opacity-[0.015] pointer-events-none"
         style={{ backgroundImage: "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%' height='100%' filter='url(%23noise)'/%3E%3C/svg%3E\")" }}
@@ -81,7 +81,7 @@ export function HowItWorksSection() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-14 md:mb-20"
+          className="text-center mb-10 md:mb-14"
         >
           <span className="inline-block bg-pastel-yellow/60 px-4 py-1.5 rounded-full text-sm font-medium uppercase tracking-wide mb-5">
             How it works

@@ -68,7 +68,7 @@ export function FAQHomeSection() {
   const [openIndex, setOpenIndex] = useState<number | null>(null)
   
   return (
-    <section id="faq" className="relative py-16 md:py-28 px-4 sm:px-6 lg:px-8">
+    <section id="faq" className="relative py-12 md:py-20 px-4 sm:px-6 lg:px-8">
       {/* Soft background */}
       <div className="absolute inset-0 bg-white/20 pointer-events-none" />
 

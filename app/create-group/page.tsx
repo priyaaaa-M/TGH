@@ -29,11 +29,17 @@ export default function CreateGroupPage() {
     setIsCheckingEmail(true)
 
     try {
-      const allowedEmailsStr = process.env.NEXT_PUBLIC_ALLOWED_GROUP_EMAILS || ""
-      const allowedEmails = allowedEmailsStr.split(",").map(em => em.trim().toLowerCase())
       const normalized = emailInput.trim().toLowerCase()
 
-      if (!allowedEmails.includes(normalized)) {
+      // Validate against server-only ALLOWED_GROUP_EMAILS via secure API route
+      const res = await fetch("/api/verify-group-email", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: normalized }),
+      })
+      const data = await res.json()
+
+      if (!data.allowed) {
         setEmailError("This email is not authorized to create a group.")
         return
       }

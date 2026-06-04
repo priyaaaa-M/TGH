@@ -4,11 +4,10 @@ import { motion } from "framer-motion"
 import { Heart, Sparkles } from "lucide-react"
 
 const marqueeItems = [
-  "EVER FELT LIKE YOU'RE CONSTANTLY PERFORMING?",
-  "SAYING THE RIGHT THINGS.",
-  "LOOKING A CERTAIN WAY.",
-  "BEING... ACCEPTABLE?",
-  "WHAT IF THERE WAS A SPACE WHERE YOU DIDN'T HAVE TO?",
+  "STORYTELLING · THEATRE · POETRY · MUSIC · EXPRESSION · COMMUNITY",
+  "FACILITATED BY REAL PEOPLE · HELD WITH CARE",
+  "15 DAYS · OFFLINE · COMMUNITY-LED",
+  "NO FILTERS · JUST YOU",
 ]
 
 export function MarqueeStrip() {

@@ -1,5 +1,6 @@
 import { Navbar } from "@/components/navbar"
 import { HeroSection } from "@/components/hero-section"
+import { InfoPillsStrip } from "@/components/info-pills-strip"
 import { MarqueeStrip } from "@/components/marquee-strip"
 import { WhatHappensSection } from "@/components/what-happens-section"
 import { WhatIsThisSection } from "@/components/what-is-this-section"
@@ -21,6 +22,7 @@ export default function Home() {
     <main className="min-h-screen bg-[#F8F4EE]">
       <Navbar />
       <HeroSection />
+      <InfoPillsStrip />
       <MarqueeStrip />
       <WhatHappensSection />
       <WhatIsThisSection />

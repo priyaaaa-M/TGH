@@ -6,13 +6,19 @@ import { ArrowUpRight } from "lucide-react"
 interface RegistrationButtonProps {
   className?: string
   text?: string
+  showHelper?: boolean
+  onClick?: () => void
 }
 
-export function RegistrationButton({ className = "", text = "Join The Space" }: RegistrationButtonProps) {
+export function RegistrationButton({ className = "", text = "Join The Space", showHelper = false, onClick }: RegistrationButtonProps) {
   const FORM_LINK = "https://forms.gle/VqQ3Tdji3F4nCWny5"
 
   const handleClick = () => {
-    window.open(FORM_LINK, "_blank")
+    if (onClick) {
+      onClick()
+    } else {
+      window.open(FORM_LINK, "_blank")
+    }
   }
 
   return (
@@ -25,9 +31,11 @@ export function RegistrationButton({ className = "", text = "Join The Space" }: 
         <ArrowUpRight className="w-5 h-5 relative z-10 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
         <div className="absolute inset-0 rounded-full bg-gradient-to-r from-soft-pink/20 to-lavender/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
       </button>
-      <span className="text-xs sm:text-sm text-foreground/70 font-medium italic text-center">
-        Registrations are handled through our official form 🌸
-      </span>
+      {showHelper && (
+        <span className="text-xs sm:text-sm text-foreground/70 font-medium italic text-center">
+          Registrations are handled through our official form 🌸
+        </span>
+      )}
     </div>
   )
 }
