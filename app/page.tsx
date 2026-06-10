@@ -16,6 +16,7 @@ import { BehindTheScenesSection } from "@/components/behind-the-scenes-section"
 import { FAQHomeSection } from "@/components/faq-home-section"
 import { FinalCTASection } from "@/components/final-cta-section"
 import { Footer } from "@/components/footer"
+import { DateGate } from "@/components/date-gate"
 
 export default function Home() {
   return (
@@ -27,10 +28,15 @@ export default function Home() {
       <WhatHappensSection />
       <WhatIsThisSection />
       <HowItWorksSection />
-      <TrustSafetySection />
-      <HowItFeelsSection />
-      <TestimonialsSection />
-      <UnfilteredWallSection />
+      
+      {/* Temporarily hidden until 18 June launch phase */}
+      <DateGate revealDate="2026-06-18T00:00:00">
+        <TrustSafetySection />
+        <HowItFeelsSection />
+        <TestimonialsSection />
+        <UnfilteredWallSection />
+      </DateGate>
+
       <VoicesPreviewSection />
       <PeopleSection />
       <SafeSpaceSection />
