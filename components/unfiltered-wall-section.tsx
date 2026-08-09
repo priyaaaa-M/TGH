@@ -5,6 +5,7 @@ import { motion, AnimatePresence, PanInfo, useAnimationFrame } from "framer-moti
 import { Heart, ArrowRight, X, Send, Loader2 } from "lucide-react"
 import Link from "next/link"
 import { db, auth } from "@/lib/firebase"
+import { onAuthStateChanged } from "firebase/auth"
 import { collection, query, orderBy, onSnapshot, addDoc, serverTimestamp, limit, updateDoc, doc, increment } from "firebase/firestore"
 
 const FORM_URL = "https://forms.gle/VqQ3Tdji3F4nCWny5"
@@ -155,14 +156,22 @@ export function UnfilteredWallSection() {
 
   // Real-time listener for confessions
   useEffect(() => {
-    const q = query(collection(db, "wallNotes"), orderBy("createdAt", "desc"), limit(20))
-    const unsubscribe = onSnapshot(q, (snapshot) => {
-      const docs = snapshot.docs.map((doc) => ({
-        id: doc.id,
-        ...doc.data(),
-      })) as Confession[]
-      console.log("Firestore confessions fetched:", docs.length)
-      setDbConfessions(docs)
+    let unsubscribeSnap: (() => void) | null = null
+
+    const unsubscribeAuth = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        const q = query(collection(db, "wallNotes"), orderBy("createdAt", "desc"), limit(20))
+        unsubscribeSnap = onSnapshot(q, (snapshot) => {
+          const docs = snapshot.docs.map((doc) => ({
+            id: doc.id,
+            ...doc.data(),
+          })) as Confession[]
+          console.log("Firestore confessions fetched:", docs.length)
+          setDbConfessions(docs)
+        }, (error) => {
+          console.warn("Firestore wallNotes onSnapshot error:", error.message)
+        })
+      }
     })
 
     // Load liked notes from localStorage
@@ -171,7 +180,10 @@ export function UnfilteredWallSection() {
       setLikedCards(new Set(JSON.parse(savedLikes)))
     }
 
-    return () => unsubscribe()
+    return () => {
+      unsubscribeAuth()
+      if (unsubscribeSnap) unsubscribeSnap()
+    }
   }, [])
 
 

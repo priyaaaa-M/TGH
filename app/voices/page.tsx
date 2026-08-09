@@ -4,7 +4,7 @@ import { useState, useEffect, useRef } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { Mic, Play, ArrowUpRight, Send, X, Square, Loader2 } from "lucide-react"
 import { db, auth } from "@/lib/firebase"
-
+import { onAuthStateChanged } from "firebase/auth"
 import { collection, query, orderBy, onSnapshot, addDoc, serverTimestamp, limit, doc, updateDoc, increment, getDoc, setDoc } from "firebase/firestore"
 import { Navbar } from "@/components/navbar"
 import { Footer } from "@/components/footer"
@@ -58,51 +58,70 @@ export default function VoicesPage() {
       }
     }
 
-    const q = query(collection(db, "pollVotes"))
-    const unsubscribe = onSnapshot(q, (snapshot) => {
-      console.log("POLL UPDATED! Docs:", snapshot.docs.length)
-      const counts: any = {
-        option1: 0,
-        option2: 0,
-        option3: 0,
-        totalVotes: 0
+    let unsubscribeSnap: (() => void) | null = null
+
+    const unsubscribeAuth = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        const q = query(collection(db, "pollVotes"))
+        unsubscribeSnap = onSnapshot(q, (snapshot) => {
+          console.log("POLL UPDATED! Docs:", snapshot.docs.length)
+          const counts: any = {
+            option1: 0,
+            option2: 0,
+            option3: 0,
+            totalVotes: 0
+          }
+          
+          snapshot.docs.forEach(doc => {
+            const data = doc.data()
+            if (data.option) {
+              counts[data.option] = (counts[data.option] || 0) + 1
+              counts.totalVotes++
+            }
+          })
+          
+          setPollData(counts)
+          setIsPollLoading(false)
+        }, (error) => {
+          console.warn("POLL SYNC ERROR:", error.message)
+          setIsPollLoading(false)
+        })
       }
-      
-      snapshot.docs.forEach(doc => {
-        const data = doc.data()
-        if (data.option) {
-          counts[data.option] = (counts[data.option] || 0) + 1
-          counts.totalVotes++
-        }
-      })
-      
-      setPollData(counts)
-      setIsPollLoading(false)
-    }, (error) => {
-      console.error("POLL SYNC ERROR:", error)
-      setIsPollLoading(false)
     })
     
-    return () => unsubscribe()
+    return () => {
+      unsubscribeAuth()
+      if (unsubscribeSnap) unsubscribeSnap()
+    }
   }, [])
 
   // Real-time listener for voice notes
   useEffect(() => {
-    // Ordering by newest first. Note: If this fails, Firestore index is needed.
-    const q = query(collection(db, "voiceNotes"), orderBy("createdAt", "desc"), limit(6))
-    const unsubscribe = onSnapshot(q, (snapshot) => {
-      const notes = snapshot.docs.map((doc) => ({
-        id: doc.id,
-        ...doc.data(),
-      })) as VoiceNote[]
-      console.log("VOICE FETCHED! Count:", notes.length)
-      setVoiceNotes(notes)
-      setIsVoiceLoading(false)
-    }, (error) => {
-      console.error("VOICE SYNC ERROR:", error)
-      setIsVoiceLoading(false)
+    let unsubscribeSnap: (() => void) | null = null
+
+    const unsubscribeAuth = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        // Ordering by newest first. Note: If this fails, Firestore index is needed.
+        const q = query(collection(db, "voiceNotes"), orderBy("createdAt", "desc"), limit(6))
+        unsubscribeSnap = onSnapshot(q, (snapshot) => {
+          const notes = snapshot.docs.map((doc) => ({
+            id: doc.id,
+            ...doc.data(),
+          })) as VoiceNote[]
+          console.log("VOICE FETCHED! Count:", notes.length)
+          setVoiceNotes(notes)
+          setIsVoiceLoading(false)
+        }, (error) => {
+          console.warn("VOICE SYNC ERROR:", error.message)
+          setIsVoiceLoading(false)
+        })
+      }
     })
-    return () => unsubscribe()
+
+    return () => {
+      unsubscribeAuth()
+      if (unsubscribeSnap) unsubscribeSnap()
+    }
   }, [])
 
   const handleVote = async (optionId: string) => {

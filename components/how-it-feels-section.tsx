@@ -202,6 +202,7 @@ export function HowItFeelsSection() {
                   src="/IMG_fol/img_1.png"
                   alt="Friends sharing a warm, candid moment together"
                   fill
+                  sizes="(max-width: 768px) 160px, 192px"
                   className="object-cover"
                 />
                 {/* Subtle vignette */}

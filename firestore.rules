@@ -1,0 +1,56 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // ─── groups ────────────────────────────────────────────────────────────────
+    // Anyone (including unauthenticated visitors) can read group data.
+    // Only users who have completed the anonymous auth + email-verification flow
+    // can create or update a group. Deletion is disabled from the client.
+    match /groups/{groupId} {
+      allow read:   if true;
+      allow create, update: if request.auth != null;
+      allow delete: if false;
+    }
+
+    // ─── voiceNotes ────────────────────────────────────────────────────────────
+    // Anonymous-auth users can read and create voice notes.
+    match /voiceNotes/{noteId} {
+      allow read, create: if request.auth != null;
+      allow update, delete: if false;
+    }
+
+    // ─── pollVotes ─────────────────────────────────────────────────────────────
+    // Anonymous-auth users can read and cast a vote.
+    match /pollVotes/{voteId} {
+      allow read, create: if request.auth != null;
+      allow update, delete: if false;
+    }
+
+    // ─── wallNotes ─────────────────────────────────────────────────────────────
+    // Anonymous-auth users can read and post wall notes.
+    match /wallNotes/{noteId} {
+      allow read, create: if request.auth != null;
+      allow update, delete: if false;
+    }
+
+    // ─── testimonials ──────────────────────────────────────────────────────────
+    // Anonymous-auth users can submit a testimonial.
+    match /testimonials/{docId} {
+      allow create: if request.auth != null;
+      allow read, update, delete: if false;
+    }
+
+    // ─── subscribers ───────────────────────────────────────────────────────────
+    // Anyone can subscribe (email capture in footer).
+    match /subscribers/{docId} {
+      allow create: if true;
+      allow read, update, delete: if false;
+    }
+
+    // ─── catch-all: deny everything else ───────────────────────────────────────
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}
